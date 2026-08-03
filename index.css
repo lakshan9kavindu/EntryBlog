@@ -1,11 +1,23 @@
 body{
     font-family: ;
-    margin: 0;
+
 }
+
+/*
+header
+*/
 
 header{
     background-color: #040506;
+    height: 733px;
+    width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+/*
+navigationbar
+*/
 
 .navigation{
     display: flex;
@@ -16,7 +28,6 @@ header{
     display: inline-flex;
     margin-left: auto;
     margin-right: auto;
-    width: 1200px;
     background-color: #040506;
 }
 
@@ -72,4 +83,32 @@ header{
     margin:auto;
     width: auto;
     height: 45px;
+}
+
+
+/*
+main header
+*/
+
+.main-header{
+    display: flex;
+    width: 32px;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.line{
+    padding: 1px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 0.7px;
+    background-color: #F7F5F4;
+    height: 329px;
+    margin-bottom: 5px;
+}
+
+.social-links img{
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;   
 }
