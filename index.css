@@ -125,3 +125,49 @@ main header h1
     width: 457px;
     height: 238px;
 }
+
+/*
+header button
+*/
+
+.text-vector .header-button{
+    margin-top: 20px;
+    width: 200px;
+    height: 50px;
+    margin-left: 55px;
+}
+
+.text-vector .header-button .e-more , .s-down{
+    display: inline-flex;
+    align-items: center;
+    color: #040506;
+    text-align: center;
+    height: 42px;
+    width: 200px;
+    text-decoration: none;
+    background-color: #FDC63E;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 50px;
+    margin-bottom: 20px;
+}
+
+.e-more p, .s-down p{
+    margin-left: 20px;
+    margin-right: auto;
+}
+
+.text-vector .header-button img , .s-down img{
+    margin-left: auto;
+    width: 33px;
+    height: 33px;
+    margin: 1px;
+}
+
+.s-down{
+    background-color:#F7F5F4
+}
+
+.s-down img{
+    transform: rotate(90deg);
+}
