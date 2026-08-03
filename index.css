@@ -8,7 +8,7 @@ header
 */
 
 header{
-    background-color: #040506;
+    background-color: #9aabbc;
     height: 733px;
     width: 1300px;
     margin-left: auto;
@@ -92,7 +92,7 @@ main header
 
 .main-header{
     display: flex;
-    width: 32px;
+    width: 1100px;
     margin-top: 50px;
     margin-left: 100px;
 }
@@ -118,12 +118,13 @@ main header h1
 */
 
 .main-header .text-vector{
-    margin: 120px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .main-header .text-vector img{
-    width: 457px;
-    height: 238px;
+    width: 400px;
+    height: 200px;
 }
 
 /*
@@ -170,4 +171,176 @@ header button
 
 .s-down img{
     transform: rotate(90deg);
+}
+
+/*
+hot article
+*/
+/* 1. Main Card Container */
+.hot-article {
+    position: relative;
+    width: 400px;
+    height: 500px;
+    border-radius: 40px; /* Matched to the image's softer curve */
+    overflow: clip; /* Keeps the image inside the rounded corners */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Pushes content to the bottom */
+    padding: 24px;
+    box-sizing: border-box;
+    color: #F7F5F4;
+    font-family: sans-serif;
+}
+
+/* 2. Background Image Positioning */
+.hot-article .post-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hot-article .post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image fills the card without stretching */
+}
+
+/* 3. Gradient Overlay (The Crop Mask effect) */
+.hot-article::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Starts completely transparent, gets dark grey in the middle, solid black at bottom */
+    background: linear-gradient(to bottom, transparent 0%, rgba(20, 20, 20, 0.7) 45%, #111111 80%);
+    z-index: 1;
+}
+
+/* Ensure all text/UI elements sit ABOVE the image and gradient */
+.hot-article > div,
+.hot-article > section {
+    position: relative;
+    z-index: 2;
+}
+
+/* 4. "Latest" Label (Top Left) */
+.hot-article .lable {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: flex;
+    align-items: center;
+    color: #FDC63E;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    gap: 8px;
+}
+
+.hot-article .lable p {
+    margin: 0;
+}
+
+.hot-article .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #FDC63E;
+}
+
+/* 5. Typography (Title & Description) */
+.hot-article .category p {
+    color: #FDC63E;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    font-size: 14px;
+}
+
+.hot-article .topic h2 {
+    margin: 0 0 12px 0;
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+.hot-article .short-description h3 {
+    margin: 0 0 24px 0;
+    font-size: 15px;
+    font-weight: normal;
+    color: #d1d1d1;
+    line-height: 1.4;
+}
+
+/* 6. Profile Section (Using CSS Grid to match the layout without changing HTML) */
+.article-profile {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    row-gap: 4px;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+}
+
+.article-profile p {
+    margin: 0;
+}
+
+/* Place the avatar on the left, spanning both rows */
+.article-profile .profile-dp {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+}
+
+.article-profile .profile-dp img {
+    width: 44px;
+    height: 44px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+/* Name on the top row */
+.article-profile .author-name {
+    grid-column: 2 / 4;
+    grid-row: 1 / 2;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* Date on the bottom row, left */
+.article-profile .publish-date {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    font-size: 13px;
+    color: #a0a0a0;
+}
+
+/* Reading time on the bottom row, right */
+.article-profile .reading-time {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    font-size: 13px;
+    color: #a0a0a0;
+}
+
+/* Download/Down icon pushed all the way to the right */
+.article-profile .down-icon {
+    grid-column: 4 / 5;
+    grid-row: 1 / 3;
+    justify-self: end;
+}
+
+.article-profile .down-icon img {
+    width: 36px;
+    height: 36px;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 6px;
+    box-sizing: border-box;
 }
