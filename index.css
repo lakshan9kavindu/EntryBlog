@@ -112,3 +112,16 @@ main header
     height: 30px;
     margin-top: 10px;   
 }
+
+/*
+main header h1
+*/
+
+.main-header .text-vector{
+    margin: 120px;
+}
+
+.main-header .text-vector img{
+    width: 457px;
+    height: 238px;
+}
