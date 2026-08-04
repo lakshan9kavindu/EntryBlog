@@ -150,7 +150,7 @@ header button
     margin-left: 55px;
 }
 
-.text-vector .header-button .e-more , .s-down{
+.text-vector .header-button .e-more , .s-down, .middile-bar .button{
     display: inline-flex;
     align-items: center;
     color: #040506;
@@ -534,3 +534,66 @@ section-2 line
     font-size: 11px;
 }
 
+/*
+middle bar
+*/
+
+.middile-bar{
+    width: 1300px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    display: flex;
+    gap: 20px;
+    background-color: #040506;
+    color: #F7F5F4;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.middile-bar .profile-icon{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 40px;
+}
+
+.middile-bar .profile-icon img{
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+}
+
+.middile-bar .main-text{
+    margin-left: 20px;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.middile-bar .main-text p, .middile-bar .main-text h1{
+    margin: 10px;
+}
+
+.middile-bar .second-text{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 50px;
+}
+
+.middile-bar .button{
+    width: 220px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 40px;
+}
+
+.middile-bar .button p{
+    margin-left: 20px;
+    margin-right: auto;
+}
+
+.middile-bar .button img{
+    width: 30px;
+    height: 30px;
+}
