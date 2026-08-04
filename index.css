@@ -605,9 +605,47 @@ second article container
 .second-article{
     width: 1300px;
     height: auto;
+    margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
 }
+
+.second-article .top{
+    display: flex;
+}
+
+.second-article .top .title{
+    display: flex;
+}
+
+.second-article .top .btn{
+    display: inline-flex;
+    align-items: center;
+    color: #040506;
+    text-align: center;
+    height: 42px;
+    width: 120px;
+    text-decoration: none;
+    background-color:#d1d1d1;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 50px;
+    margin-bottom: auto;
+    margin-top: auto;
+    margin-left: auto;
+}
+
+.second-article .top .btn p{
+    margin-left: 10px;
+    margin-right: auto;
+}
+
+.second-article .top .btn img{
+    margin-left: auto;
+    width: 33px;
+    height: 33px;
+}
+
 
 .item-container{
     display: flex;
