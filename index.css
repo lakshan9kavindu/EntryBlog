@@ -1,6 +1,6 @@
 body{
     font-family: sans-serif;
-
+    margin: 0;
 }
 
 /*
@@ -8,6 +8,10 @@ header
 */
 
 header{
+    background-color: #040506;
+}
+
+.full-header{
     background-color:#040506;
     height: 733px;
     width: 1300px;
@@ -21,7 +25,7 @@ navigationbar
 
 .navigation{
     display: flex;
-    margin-top: 30px;
+    padding-top: 30px;
 }
 
 .navbar{
@@ -29,6 +33,7 @@ navigationbar
     margin-left: auto;
     margin-right: auto;
     background-color: #040506;
+    gap: 30px;
 }
 
 .nav-links{
@@ -55,6 +60,9 @@ navigationbar
 
 .search-bar{
     margin-right: auto;
+        margin: auto;
+
+    margin-left: 50px;
     display: inline-flex;
     padding: 10px;
     border: solid #F7F5F4 1px;
@@ -62,7 +70,6 @@ navigationbar
     background-color: black;
     width: 200px;
     height: 15px;
-    margin: auto;
 }
 
 .search-bar img{
