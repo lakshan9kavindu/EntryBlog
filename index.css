@@ -597,3 +597,158 @@ middle bar
     width: 30px;
     height: 30px;
 }
+
+/*
+second article container
+*/
+
+.second-article{
+    width: 1300px;
+    height: auto;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.second-article .top{
+    display: flex;
+}
+
+.second-article .top .title{
+    display: flex;
+}
+
+.second-article .top .btn{
+    display: inline-flex;
+    align-items: center;
+    color: #040506;
+    text-align: center;
+    height: 42px;
+    width: 120px;
+    text-decoration: none;
+    background-color:#d1d1d1;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 50px;
+    margin-bottom: auto;
+    margin-top: auto;
+    margin-left: auto;
+}
+
+.second-article .top .btn p{
+    margin-left: 10px;
+    margin-right: auto;
+}
+
+.second-article .top .btn img{
+    margin-left: auto;
+    width: 33px;
+    height: 33px;
+}
+
+
+.item-container{
+    display: flex;
+    row-gap: auto;
+}
+
+/*
+second article card
+*/
+
+/* --- Main Card Container --- */
+.article-item {
+    display: flex;
+    background-color: #F8F8F8; 
+    border-radius: 24px;
+    padding: 16px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); 
+    gap: 24px; 
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* --- Image Section --- */
+.article-item .article-image {
+    flex: 0 0 150px; 
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.article-item .article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.article-item .caption {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Category */
+.article-item .category p {
+    color: #F2B83A; 
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 0 12px 0;
+}
+
+/* Topic / Title */
+.article-item .topic h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #000000;
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+}
+
+/* Description */
+.article-item .short-description h3 {
+    font-size: 13px;
+    font-weight: 400;
+    color: #4A4A4A;
+    margin: 0 0 24px 0;
+}
+
+.article-item .article-profile {
+    display:flex;
+}
+
+.article-item .profile-dp img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Author Name */
+.article-item .author-name {
+    grid-column: 2 / span 2;
+    grid-row: 1;
+}
+
+.article-item .author-name p {
+    font-weight: 700;
+    font-size: 12px;
+    color: #000000;
+    margin: 0;
+}
+
+.article-item .author-name h3{
+    font-size: 12px;
+    margin: 0;
+}
+
+.article-item .reading-time p {
+    font-weight: 600;
+    font-size: 10px;
+    color: #000000;
+    margin: 0;
+}
