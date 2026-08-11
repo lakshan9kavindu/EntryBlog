@@ -68,7 +68,6 @@ form
 */
 
 .signup-form {
-    width: 350px;
     margin-left: 50px;
     margin-top: 50px;
     color: #F7F5F4;
@@ -97,6 +96,27 @@ form p {
     margin-top: 0;
 }
 
+.signup-form a{
+    color: #FDC63E;
+    font-weight: bold;
+}
+
+/*
+login section 2
+*/
+
+.section-2{
+    display: flex;
+    justify-content: space-between;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+form .section-2 a{
+    color: #F7F5F4;
+    font-weight: bold;
+}
+
 /*
 register button
 */
@@ -108,7 +128,6 @@ form .register-button {
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    width: 100%;
     display: flex;
     margin-left: auto;
     margin-right: auto;
@@ -128,10 +147,6 @@ button{
     margin-right: auto;
 }
 
-.signup-form a{
-    color: #FDC63E;
-    font-weight: bold;
-}
 
 /*
 footer
