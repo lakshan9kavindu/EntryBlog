@@ -76,7 +76,6 @@ $articleCards = $articles ?: [null, null];
             <div class="button-2">
                 <a href="article-upload.php"><h3>New article</h3><img src="assets/icons/facebook.png" alt="Add article"></a>
                 <a href="logout.php"><h3>Log out</h3><img src="assets/icons/facebook.png" alt="Log out"></a>
-                <a href="#"><h3>Edit profile</h3><img src="assets/icons/facebook.png" alt="Edit profile"></a>
             </div>
         </div>
         <div class="article-card">

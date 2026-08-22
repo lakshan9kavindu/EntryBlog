@@ -7,16 +7,54 @@ require_once __DIR__ . '/auth.php';
 $userId = requireUser();
 startUserSession();
 $errorMessage = '';
+$editId = filter_input(INPUT_GET, 'edit', FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+$editArticle = null;
+$allowedCategories = ['Technology', 'Health', 'Travel', 'Food', 'Business'];
+
+if ($editId !== false && $editId !== null) {
+    $editQuery = $pdo->prepare('SELECT id, title, thumbnail, category, short_dec, article FROM articles WHERE id = :id AND userid = :userid LIMIT 1');
+    $editQuery->execute(['id' => $editId, 'userid' => $userId]);
+    $editArticle = $editQuery->fetch();
+    if (!$editArticle) {
+        http_response_code(404);
+        exit('Article not found.');
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     verifyCsrfToken((string) ($_POST['csrf_token'] ?? ''));
+
+    $postedEditId = filter_var($_POST['edit_id'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+    $action = (string) ($_POST['action'] ?? 'save');
+
+    if ($action === 'delete' && ($postedEditId === false || $postedEditId === null)) {
+        http_response_code(400);
+        exit('Choose an existing article before deleting.');
+    }
+
+    if ($action === 'delete' && $postedEditId !== false && $postedEditId !== null) {
+        $deleteQuery = $pdo->prepare('SELECT thumbnail FROM articles WHERE id = :id AND userid = :userid LIMIT 1');
+        $deleteQuery->execute(['id' => $postedEditId, 'userid' => $userId]);
+        $articleToDelete = $deleteQuery->fetch();
+        if (!$articleToDelete) {
+            http_response_code(404);
+            exit('Article not found.');
+        }
+        $deleteArticle = $pdo->prepare('DELETE FROM articles WHERE id = :id AND userid = :userid');
+        $deleteArticle->execute(['id' => $postedEditId, 'userid' => $userId]);
+        $oldThumbnail = (string) ($articleToDelete['thumbnail'] ?? '');
+        if (preg_match('/^uploads\/[a-f0-9]{32}\.(jpg|png|webp)$/', $oldThumbnail)) {
+            @unlink(__DIR__ . '/' . $oldThumbnail);
+        }
+        header('Location: profile.php?deleted=1');
+        exit;
+    }
 
     $title = trim((string) ($_POST['title'] ?? ''));
     $category = trim((string) ($_POST['category'] ?? ''));
     $shortDescription = trim((string) ($_POST['short_description'] ?? ''));
     $article = trim((string) ($_POST['article'] ?? ''));
     $thumbnail = $_FILES['thumbnail'] ?? null;
-    $allowedCategories = ['Technology', 'Health', 'Travel', 'Food', 'Business'];
 
     if ($title === '' || strlen($title) > 255) {
         $errorMessage = 'Please enter a title of 255 characters or fewer.';
@@ -26,49 +64,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorMessage = 'Please enter a short description of 500 characters or fewer.';
     } elseif ($article === '' || strlen($article) < 20 || strlen($article) > 1000000) {
         $errorMessage = 'Article content must be between 20 and 1,000,000 characters.';
-    } elseif (!$thumbnail || $thumbnail['error'] !== UPLOAD_ERR_OK) {
+    } elseif ($postedEditId === false && (!$thumbnail || $thumbnail['error'] !== UPLOAD_ERR_OK)) {
         $errorMessage = 'Please choose an image thumbnail.';
-    } elseif ($thumbnail['size'] > 5 * 1024 * 1024) {
+    } elseif ($thumbnail && $thumbnail['error'] === UPLOAD_ERR_OK && $thumbnail['size'] > 5 * 1024 * 1024) {
         $errorMessage = 'The thumbnail must be 5 MB or smaller.';
     } else {
-        $imageInfo = @getimagesize($thumbnail['tmp_name']);
-        $mimeType = (new finfo(FILEINFO_MIME_TYPE))->file($thumbnail['tmp_name']);
+        $hasNewThumbnail = $thumbnail && $thumbnail['error'] === UPLOAD_ERR_OK;
+        $imageInfo = $hasNewThumbnail ? @getimagesize($thumbnail['tmp_name']) : null;
+        $mimeType = $hasNewThumbnail ? (new finfo(FILEINFO_MIME_TYPE))->file($thumbnail['tmp_name']) : '';
         $allowedTypes = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
-        $isSixteenByNine = $imageInfo && abs(($imageInfo[0] / $imageInfo[1]) - (16 / 9)) < 0.08;
+        $isSixteenByNine = $imageInfo && $imageInfo[1] > 0 && abs(($imageInfo[0] / $imageInfo[1]) - (16 / 9)) < 0.08;
 
-        if (!$imageInfo || !isset($allowedTypes[$mimeType]) || !$isSixteenByNine) {
+        if ($hasNewThumbnail && (!$imageInfo || !isset($allowedTypes[$mimeType]) || !$isSixteenByNine)) {
             $errorMessage = 'Please upload a JPG, PNG, or WebP image with a 16:9 ratio.';
         } else {
-            $uploadDirectory = __DIR__ . '/uploads';
-            if (!is_dir($uploadDirectory)) {
-                mkdir($uploadDirectory, 0750, true);
+            $databasePath = $editArticle['thumbnail'] ?? null;
+            if ($hasNewThumbnail) {
+                $uploadDirectory = __DIR__ . '/uploads';
+                if (!is_dir($uploadDirectory)) mkdir($uploadDirectory, 0750, true);
+                $fileName = bin2hex(random_bytes(16)) . '.' . $allowedTypes[$mimeType];
+                $storedPath = $uploadDirectory . '/' . $fileName;
+                $databasePath = 'uploads/' . $fileName;
+                if (!move_uploaded_file($thumbnail['tmp_name'], $storedPath)) {
+                    $errorMessage = 'The thumbnail could not be saved.';
+                }
             }
 
-            $fileName = bin2hex(random_bytes(16)) . '.' . $allowedTypes[$mimeType];
-            $storedPath = $uploadDirectory . '/' . $fileName;
-            $databasePath = 'uploads/' . $fileName;
-
-            if (!move_uploaded_file($thumbnail['tmp_name'], $storedPath)) {
-                $errorMessage = 'The thumbnail could not be saved.';
-            } else {
-                $createArticle = $pdo->prepare(
-                    'INSERT INTO articles (title, thumbnail, category, userid, short_dec, article) VALUES (:title, :thumbnail, :category, :userid, :short_dec, :article)'
-                );
-                $createArticle->execute([
-                    'title' => $title,
-                    'thumbnail' => $databasePath,
-                    'category' => $category,
-                    'userid' => $userId,
-                    'short_dec' => $shortDescription,
-                    'article' => $article,
-                ]);
-
-                header('Location: profile.php?created=1');
+            if ($errorMessage === '') {
+                if ($postedEditId !== false && $postedEditId !== null) {
+                    $updateArticle = $pdo->prepare('UPDATE articles SET title = :title, thumbnail = :thumbnail, category = :category, short_dec = :short_dec, article = :article WHERE id = :id AND userid = :userid');
+                    $updateArticle->execute(['title' => $title, 'thumbnail' => $databasePath, 'category' => $category, 'short_dec' => $shortDescription, 'article' => $article, 'id' => $postedEditId, 'userid' => $userId]);
+                    header('Location: profile.php?updated=1');
+                } else {
+                    $createArticle = $pdo->prepare('INSERT INTO articles (title, thumbnail, category, userid, short_dec, article) VALUES (:title, :thumbnail, :category, :userid, :short_dec, :article)');
+                    $createArticle->execute(['title' => $title, 'thumbnail' => $databasePath, 'category' => $category, 'userid' => $userId, 'short_dec' => $shortDescription, 'article' => $article]);
+                    header('Location: profile.php?created=1');
+                }
                 exit;
             }
         }
     }
 }
+
+$formTitle = (string) ($_POST['title'] ?? ($editArticle['title'] ?? ''));
+$formCategory = (string) ($_POST['category'] ?? ($editArticle['category'] ?? ''));
+$formShortDescription = (string) ($_POST['short_description'] ?? ($editArticle['short_dec'] ?? ''));
+$formArticle = (string) ($_POST['article'] ?? ($editArticle['article'] ?? ''));
+$currentThumbnail = (string) ($editArticle['thumbnail'] ?? '');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,13 +144,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($errorMessage !== ''): ?><p class="upload-message error"><?php echo escapeOutput($errorMessage); ?></p><?php endif; ?>
         <form method="post" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" value="<?php echo escapeOutput(csrfToken()); ?>">
+            <?php if ($editId !== false && $editId !== null): ?><input type="hidden" name="edit_id" value="<?php echo (int) $editId; ?>"><?php endif; ?>
             <div class="category-bar">
                 <strong>CATEGORY</strong><span class="category-arrow">&#8250;</span>
                 <label class="visually-hidden" for="category-input">Category</label>
                 <select id="category-input" name="category" required>
                     <option value="">Select category</option>
                     <?php foreach (['Technology', 'Health', 'Travel', 'Food', 'Business'] as $categoryOption): ?>
-                        <option value="<?php echo escapeOutput($categoryOption); ?>" <?php echo (($_POST['category'] ?? '') === $categoryOption) ? 'selected' : ''; ?>><?php echo escapeOutput($categoryOption); ?></option>
+                        <option value="<?php echo escapeOutput($categoryOption); ?>" <?php echo ($formCategory === $categoryOption) ? 'selected' : ''; ?>><?php echo escapeOutput($categoryOption); ?></option>
                     <?php endforeach; ?>
                 </select>
                 <span class="category-divider">|</span><span class="category-label">Article category</span>
@@ -116,16 +159,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <section class="upload-intro">
                 <div class="article-fields">
                     <label for="title-input">Article title</label>
-                    <input id="title-input" name="title" type="text" maxlength="255" value="<?php echo escapeOutput((string) ($_POST['title'] ?? '')); ?>" placeholder="Enter article title" required>
+                    <input id="title-input" name="title" type="text" maxlength="255" value="<?php echo escapeOutput($formTitle); ?>" placeholder="Enter article title" required>
                     <label for="short-description-input">Short description</label>
-                    <textarea id="short-description-input" name="short_description" maxlength="500" placeholder="Describe your article briefly" required><?php echo escapeOutput((string) ($_POST['short_description'] ?? '')); ?></textarea>
+                    <textarea id="short-description-input" name="short_description" maxlength="500" placeholder="Describe your article briefly" required><?php echo escapeOutput($formShortDescription); ?></textarea>
                     <h1>UPLOAD HERE TO YOUR<br>ARTICLE THUMBNAIL<br>ACCEPT RATION WITH<br>16:9</h1>
                 </div>
                 <span class="intro-arrow">&#8250;</span>
                 <label class="thumbnail-upload" for="thumbnail-input">
-                    <span class="upload-placeholder" aria-hidden="true">&#9673;</span>
-                    <img class="thumbnail-preview" alt="Selected thumbnail preview" hidden>
-                    <input id="thumbnail-input" name="thumbnail" type="file" accept="image/jpeg,image/png,image/webp" required>
+                    <span class="upload-placeholder" aria-hidden="true"<?php if ($currentThumbnail !== ''): ?> hidden<?php endif; ?>>&#9673;</span>
+                    <img class="thumbnail-preview" alt="Selected thumbnail preview"<?php if ($currentThumbnail !== ''): ?> src="<?php echo escapeOutput($currentThumbnail); ?>"<?php else: ?> hidden<?php endif; ?>>
+                    <input id="thumbnail-input" name="thumbnail" type="file" accept="image/jpeg,image/png,image/webp"<?php if (!$editArticle): ?> required<?php endif; ?>>
                 </label>
             </section>
             <section class="editor" aria-label="Article content editor">
@@ -133,9 +176,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <span>ADD YOUR CONTENT HERE AND USE THOSE TOOLS TO STYLISE</span>
                     <button type="button" aria-label="Bold"><strong>B</strong></button><button type="button" aria-label="Italic"><em>I</em></button><button type="button" aria-label="List">&#8801;</button>
                 </div>
-                <textarea name="article" placeholder="type here..." aria-label="Article content" required><?php echo escapeOutput((string) ($_POST['article'] ?? '')); ?></textarea>
+                <textarea name="article" placeholder="type here..." aria-label="Article content" required><?php echo escapeOutput($formArticle); ?></textarea>
             </section>
-            <button class="submit-article" type="submit">Submit article <span>&#8250;</span></button>
+            <div class="upload-actions">
+                <button class="submit-article" type="submit" name="action" value="save"><?php echo $editArticle ? 'Update article' : 'Submit article'; ?> <span>&#8250;</span></button>
+                <button class="delete-article" type="submit" name="action" value="delete" formnovalidate>Delete article</button>
+            </div>
         </form>
     </main>
     <script>

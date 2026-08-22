@@ -4,17 +4,19 @@ declare(strict_types=1);
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/auth.php';
 
+startUserSession();
+
 $requestedId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, [
     'options' => ['min_range' => 1],
 ]);
 
 if ($requestedId === false || $requestedId === null) {
     $articleQuery = $pdo->query(
-        'SELECT a.id, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email FROM articles a JOIN users u ON u.id = a.userid ORDER BY a.date DESC LIMIT 1'
+        'SELECT a.id, a.userid, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email FROM articles a JOIN users u ON u.id = a.userid ORDER BY a.date DESC LIMIT 1'
     );
 } else {
     $articleQuery = $pdo->prepare(
-        'SELECT a.id, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email FROM articles a JOIN users u ON u.id = a.userid WHERE a.id = :id LIMIT 1'
+        'SELECT a.id, a.userid, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email FROM articles a JOIN users u ON u.id = a.userid WHERE a.id = :id LIMIT 1'
     );
     $articleQuery->execute(['id' => $requestedId]);
 }
@@ -24,6 +26,11 @@ $article = $articleQuery->fetch();
 if (!$article) {
     http_response_code(404);
     exit('Article not found.');
+}
+
+if (isset($_SESSION['user_id']) && (int) $_SESSION['user_id'] === (int) $article['userid']) {
+    header('Location: article-upload.php?edit=' . (int) $article['id']);
+    exit;
 }
 
 $title = (string) ($article['title'] ?: 'Untitled article');
