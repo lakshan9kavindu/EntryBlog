@@ -193,7 +193,7 @@ hot article
     position: relative;
     width: 400px;
     height: 500px;
-    border-radius: 40px; /* Matched to the image's softer curve */
+    border-radius: 40px; /* image's softer curve */
     overflow: clip; /* Keeps the image inside the rounded corners */
     display: flex;
     flex-direction: column;
