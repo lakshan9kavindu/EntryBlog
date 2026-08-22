@@ -87,6 +87,91 @@ navigationbar
     height: 45px;
 }
 
+.profile-page {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    width: min(calc(100% - 40px), 1100px);
+    margin: 50px auto;
+    color: #040506;
+}
+
+.profile-summary,
+.profile-article {
+    padding: 28px;
+    border-radius: 20px;
+    background: #f7f5f4;
+}
+
+.profile-summary {
+    align-self: start;
+    text-align: center;
+}
+
+.profile-summary > img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-summary h1 {
+    overflow-wrap: anywhere;
+    margin: 18px 0 4px;
+    font-size: 19px;
+}
+
+.profile-summary p {
+    margin: 0 0 24px;
+    color: #777;
+    font-size: 13px;
+}
+
+.profile-action {
+    display: block;
+    margin-top: 12px;
+    padding: 10px 16px;
+    border-radius: 22px;
+    color: #040506;
+    background: #fdc63e;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.profile-articles h2 {
+    margin: 0 0 18px;
+    color: #f7f5f4;
+    font-size: 28px;
+}
+
+.profile-article {
+    margin-bottom: 16px;
+}
+
+.profile-article h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+.profile-article p {
+    margin: 0 0 12px;
+    line-height: 1.45;
+}
+
+.profile-article time,
+.empty-state {
+    color: #777;
+    font-size: 12px;
+}
+
+@media (max-width: 760px) {
+    .profile-page {
+        grid-template-columns: 1fr;
+        margin-top: 30px;
+    }
+}
+
 .first-card{
     display: flex;
     width: 1300px;
