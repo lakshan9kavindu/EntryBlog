@@ -45,10 +45,10 @@ $articleCards = $articles ?: [null, null];
                     </div>
                     <div class="nav-links">
                         <ul>
-                            <li class="active"><a href="index.html">Home</a></li>
-                            <li><a href="index.html">Categories</a></li>
-                            <li><a href="index.html">About us</a></li>
-                            <li><a href="index.html">Contact us</a></li>
+                            <li class="active"><a href="index.php">Home</a></li>
+                            <li><a href="index.php#categories">Categories</a></li>
+                            <li><a href="index.php#about">About us</a></li>
+                            <li><a href="index.php#contact">Contact us</a></li>
                         </ul>
                     </div>
                     <div class="search-bar">
@@ -128,10 +128,10 @@ $articleCards = $articles ?: [null, null];
                 <div class="third">
                     <div class="page">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="index.html">Categories</a></li>
-                            <li><a href="index.html">About us</a></li>
-                            <li><a href="index.html">Contact us</a></li>
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="index.php#categories">Categories</a></li>
+                            <li><a href="index.php#about">About us</a></li>
+                            <li><a href="index.php#contact">Contact us</a></li>
                         </ul>
                     </div>
                     <div class="button">
