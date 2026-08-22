@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="article-upload.css">
+    <title>Upload Article</title>
+</head>
+
+<body>
+    <div class="full-header">
+        <section class="navigation">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="assets/logo/logo.png" alt="Logo">
+                </div>
+                <div class="nav-links">
+                    <ul>
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <img src="assets/icons/Search-white.png" alt="Search Icon">
+                </div>
+                <div class="user-profile">
+                    <img src="assets/icons/login-black.png" alt="User Icon">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <main class="upload-page">
+        <div class="category-bar">
+            <strong>CATEGORY</strong>
+            <span class="category-arrow">&#8250;</span>
+            <span class="category-label">Tech</span>
+            <span class="category-divider">|</span>
+            <span class="category-label">AI Technology</span>
+        </div>
+
+        <section class="upload-intro">
+            <h1>UPLOAD HERE TO YOUR<br>ARTICLE THUMBNAIL<br>ACCEPT RATION WITH<br>16:9</h1>
+            <span class="intro-arrow">&#8250;</span>
+            <label class="thumbnail-upload" for="thumbnail-input">
+                <span aria-hidden="true">&#9673;</span>
+                <input id="thumbnail-input" type="file" accept="image/*">
+            </label>
+        </section>
+
+        <section class="editor" aria-label="Article content editor">
+            <div class="editor-toolbar">
+                <span>ADD YOUR CONTENT HERE AND USE THOSE TOOLS TO STYLISE</span>
+                <button type="button" aria-label="Bold"><strong>B</strong></button>
+                <button type="button" aria-label="Italic"><em>I</em></button>
+                <button type="button" aria-label="List">&#8801;</button>
+            </div>
+            <textarea placeholder="type here..." aria-label="Article content"></textarea>
+        </section>
+    </main>
+</body>
+</html>
