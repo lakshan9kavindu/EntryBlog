@@ -87,7 +87,7 @@ $articleCards = $articles ?: [null, null];
                     $articleDate = $article ? (string) $article['date'] : '';
                     $thumbnail = $article && !empty($article['thumbnail']) ? (string) $article['thumbnail'] : 'assets/sample.png';
                 ?>
-                <div class="editors-article">
+                <div class="editors-article"<?php if ($article): ?> onclick="window.location.href='article.php?id=<?php echo (int) $article['id']; ?>'"<?php endif; ?> >
                     <div class="lable"><div class="dot"></div><p>Latest</p></div>
                     <div class="post-image"><img src="<?php echo escapeOutput($thumbnail); ?>" alt="Post image"></div>
                     <div class="category"><p>Technology</p></div>
