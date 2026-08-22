@@ -901,3 +901,12 @@ footer .social img{
     height: 50px;
     margin-right: 20px;
 }
+
+.category-item{
+    text-decoration: none;
+}
+
+.view-all-btn,
+.second-article .top .btn{
+    text-decoration: none;
+}

@@ -23,7 +23,7 @@ $articleQuery->execute(['userid' => $userId]);
 $articles = $articleQuery->fetchAll();
 $displayEmail = escapeOutput((string) $user['email']);
 
-$articleCards = $articles ?: [null, null];
+$articleCards = array_slice($articles, 0, 2);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,7 +103,7 @@ $articleCards = $articles ?: [null, null];
                 <?php endforeach; ?>
             </div>
             <div class="view-articles-container">
-                <a href="#" class="view-articles"><h3>Your Articles</h3><img src="assets/icons/Down Button.png" alt="Your articles"></a>
+                <a href="all-articles.php?owner=1" class="view-articles"><h3>Your Articles</h3><img src="assets/icons/Down Button.png" alt="Your articles"></a>
             </div>
         </div>
     </section>

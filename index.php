@@ -16,7 +16,8 @@ $categories = $pdo->query(
 $articleCards = $articles ?: [null];
 function articleValue(?array $article, string $key, string $fallback): string
 {
-    return escapeOutput((string) ($article[$key] ?? $fallback));
+    $value = trim((string) ($article[$key] ?? ''));
+    return escapeOutput($value !== '' ? $value : $fallback);
 }
 function articleThumbnail(?array $article): string
 {
@@ -109,20 +110,20 @@ function renderArticleCard(?array $article, string $class): void
                 <h2>Categories</h2>
                 <div class="category-list">
                     <?php foreach (array_slice($categories, 0, 4) as $category): ?>
-                        <div class="category-item"><img src="assets/icons/Variant3-1.png"
+                        <a class="category-item" href="all-articles.php?category=<?php echo urlencode((string) $category['category']); ?>"><img src="assets/icons/Variant3-1.png"
                                 alt="<?php echo escapeOutput((string) $category['category']); ?>">
                             <h2><?php echo escapeOutput((string) $category['category']); ?></h2>
                             <p><?php echo (int) $category['article_count']; ?> articles</p>
-                        </div><?php endforeach; ?>
+                        </a><?php endforeach; ?>
                     <?php if (!$categories): ?>
                         <div class="category-item">
                             <h2>No categories</h2>
                             <p>0 articles</p>
                         </div><?php endif; ?>
                 </div>
-                <div class="view-all-btn">
+                <a class="view-all-btn" href="all-articles.php">
                     <p>View all categories</p><img src="assets/icons/Down Button.png" alt="View all">
-                </div>
+                </a>
             </div>
             <div class="line"></div>
             <div class="article-cards">
@@ -160,9 +161,9 @@ function renderArticleCard(?array $article, string $class): void
                     <h1>latests from readers’</h1>
                     <h2>picks</h2>
                 </div>
-                <div class="btn">
+                <a class="btn" href="all-articles.php">
                     <p>View all</p><img src="assets/icons/Down Button.png" alt="View all">
-                </div>
+                </a>
             </div>
             <div class="item-container">
                 <?php foreach (array_slice($articleCards, 0, 3) as $article): ?>
