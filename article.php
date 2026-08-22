@@ -10,11 +10,11 @@ $requestedId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, [
 
 if ($requestedId === false || $requestedId === null) {
     $articleQuery = $pdo->query(
-        'SELECT a.id, a.thumbnail, a.short_dec, a.article, a.date, u.email FROM articles a JOIN users u ON u.id = a.userid ORDER BY a.date DESC LIMIT 1'
+        'SELECT a.id, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email FROM articles a JOIN users u ON u.id = a.userid ORDER BY a.date DESC LIMIT 1'
     );
 } else {
     $articleQuery = $pdo->prepare(
-        'SELECT a.id, a.thumbnail, a.short_dec, a.article, a.date, u.email FROM articles a JOIN users u ON u.id = a.userid WHERE a.id = :id LIMIT 1'
+        'SELECT a.id, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email FROM articles a JOIN users u ON u.id = a.userid WHERE a.id = :id LIMIT 1'
     );
     $articleQuery->execute(['id' => $requestedId]);
 }
@@ -26,7 +26,9 @@ if (!$article) {
     exit('Article not found.');
 }
 
-$title = (string) ($article['short_dec'] ?: 'Untitled article');
+$title = (string) ($article['title'] ?: 'Untitled article');
+$category = (string) ($article['category'] ?: 'Technology');
+$shortDescription = (string) ($article['short_dec'] ?: '');
 $content = (string) $article['article'];
 $thumbnail = (string) ($article['thumbnail'] ?: 'assets/sample.png');
 $author = (string) $article['email'];
@@ -56,10 +58,10 @@ $date = (string) $article['date'];
         <div class="save"><img src="assets/icons/save-icon.png" alt="Save Icon"></div>
     </div></div>
     <div class="middle"><div class="title"><h1><?php echo escapeOutput($title); ?></h1></div>
-        <div class="some-btn"><div class="btn"><img src="assets/icons/like.png" alt="Like Icon"><p>Total reads: 1,234</p></div><div class="btn"><img src="assets/icons/like.png" alt="Like Icon"><p>Likes 20</p></div><div class="btn"><img src="assets/icons/share.png" alt="Share Icon"><p>Minutes 3</p></div><div class="btn"><img src="assets/icons/save-icon.png" alt="Bookmark Icon"><p>Saved</p></div></div>
+        <div class="some-btn"><div class="btn"><img src="assets/icons/like.png" alt="Like Icon"><p><?php echo escapeOutput($category); ?></p></div><div class="btn"><img src="assets/icons/like.png" alt="Like Icon"><p>Likes 20</p></div><div class="btn"><img src="assets/icons/share.png" alt="Share Icon"><p>Minutes 3</p></div><div class="btn"><img src="assets/icons/save-icon.png" alt="Bookmark Icon"><p>Saved</p></div></div>
     </div></div>
 
-    <div class="artcle-content"><div class="content"><p><?php echo nl2br(escapeOutput($content)); ?></p></div>
+    <div class="artcle-content"><div class="content"><p class="article-short-description"><?php echo escapeOutput($shortDescription); ?></p><p><?php echo nl2br(escapeOutput($content)); ?></p></div>
         <div class="profile"><div class="profile-image"><img src="assets/sample-dp.png" alt="Profile Image"></div><div class="profile-info"><h3><?php echo escapeOutput($author); ?></h3><p><?php echo escapeOutput($date); ?></p></div><div class="follow-btn"><button>Follow</button><img src="assets/icons/Vector 2.png" alt="Follow Icon"></div><div class="like-btn"><button>Like</button><img src="assets/icons/Vector 2.png" alt="Like Icon"></div><div class="save-btn"><button>Save</button><img src="assets/icons/Vector 2.png" alt="Save Icon"></div></div>
     </div>
 

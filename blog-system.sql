@@ -11,7 +11,9 @@ CREATE TABLE users (
 -- Articles
 CREATE TABLE articles (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
     thumbnail VARCHAR(500),
+    category VARCHAR(100) NOT NULL DEFAULT 'Technology',
     userid INT UNSIGNED NOT NULL,
     short_dec TEXT,
     article TEXT NOT NULL,

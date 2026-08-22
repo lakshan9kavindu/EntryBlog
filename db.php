@@ -19,6 +19,14 @@ try {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false,
     ]);
+
+    $articleColumns = $pdo->query('SHOW COLUMNS FROM articles')->fetchAll(PDO::FETCH_COLUMN);
+    if (!in_array('title', $articleColumns, true)) {
+        $pdo->exec("ALTER TABLE articles ADD COLUMN title VARCHAR(255) NOT NULL DEFAULT '' AFTER id");
+    }
+    if (!in_array('category', $articleColumns, true)) {
+        $pdo->exec("ALTER TABLE articles ADD COLUMN category VARCHAR(100) NOT NULL DEFAULT 'Technology' AFTER thumbnail");
+    }
 } catch (PDOException $exception) {
     http_response_code(500);
     exit('Database connection failed. Import blog-system.sql and check your XAMPP MySQL settings.');

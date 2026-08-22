@@ -11,10 +11,20 @@ $errorMessage = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     verifyCsrfToken((string) ($_POST['csrf_token'] ?? ''));
 
+    $title = trim((string) ($_POST['title'] ?? ''));
+    $category = trim((string) ($_POST['category'] ?? ''));
+    $shortDescription = trim((string) ($_POST['short_description'] ?? ''));
     $article = trim((string) ($_POST['article'] ?? ''));
     $thumbnail = $_FILES['thumbnail'] ?? null;
+    $allowedCategories = ['Technology', 'Health', 'Travel', 'Food', 'Business'];
 
-    if ($article === '' || strlen($article) < 20 || strlen($article) > 1000000) {
+    if ($title === '' || strlen($title) > 255) {
+        $errorMessage = 'Please enter a title of 255 characters or fewer.';
+    } elseif (!in_array($category, $allowedCategories, true)) {
+        $errorMessage = 'Please choose a valid category.';
+    } elseif ($shortDescription === '' || strlen($shortDescription) > 500) {
+        $errorMessage = 'Please enter a short description of 500 characters or fewer.';
+    } elseif ($article === '' || strlen($article) < 20 || strlen($article) > 1000000) {
         $errorMessage = 'Article content must be between 20 and 1,000,000 characters.';
     } elseif (!$thumbnail || $thumbnail['error'] !== UPLOAD_ERR_OK) {
         $errorMessage = 'Please choose an image thumbnail.';
@@ -41,12 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!move_uploaded_file($thumbnail['tmp_name'], $storedPath)) {
                 $errorMessage = 'The thumbnail could not be saved.';
             } else {
-                $shortDescription = mb_substr($article, 0, 120);
                 $createArticle = $pdo->prepare(
-                    'INSERT INTO articles (thumbnail, userid, short_dec, article) VALUES (:thumbnail, :userid, :short_dec, :article)'
+                    'INSERT INTO articles (title, thumbnail, category, userid, short_dec, article) VALUES (:title, :thumbnail, :category, :userid, :short_dec, :article)'
                 );
                 $createArticle->execute([
+                    'title' => $title,
                     'thumbnail' => $databasePath,
+                    'category' => $category,
                     'userid' => $userId,
                     'short_dec' => $shortDescription,
                     'article' => $article,
@@ -92,10 +103,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="post" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" value="<?php echo escapeOutput(csrfToken()); ?>">
             <div class="category-bar">
-                <strong>CATEGORY</strong><span class="category-arrow">&#8250;</span><span class="category-label">Tech</span><span class="category-divider">|</span><span class="category-label">AI Technology</span>
+                <strong>CATEGORY</strong><span class="category-arrow">&#8250;</span>
+                <label class="visually-hidden" for="category-input">Category</label>
+                <select id="category-input" name="category" required>
+                    <option value="">Select category</option>
+                    <?php foreach (['Technology', 'Health', 'Travel', 'Food', 'Business'] as $categoryOption): ?>
+                        <option value="<?php echo escapeOutput($categoryOption); ?>" <?php echo (($_POST['category'] ?? '') === $categoryOption) ? 'selected' : ''; ?>><?php echo escapeOutput($categoryOption); ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <span class="category-divider">|</span><span class="category-label">Article category</span>
             </div>
             <section class="upload-intro">
-                <h1>UPLOAD HERE TO YOUR<br>ARTICLE THUMBNAIL<br>ACCEPT RATION WITH<br>16:9</h1>
+                <div class="article-fields">
+                    <label for="title-input">Article title</label>
+                    <input id="title-input" name="title" type="text" maxlength="255" value="<?php echo escapeOutput((string) ($_POST['title'] ?? '')); ?>" placeholder="Enter article title" required>
+                    <label for="short-description-input">Short description</label>
+                    <textarea id="short-description-input" name="short_description" maxlength="500" placeholder="Describe your article briefly" required><?php echo escapeOutput((string) ($_POST['short_description'] ?? '')); ?></textarea>
+                    <h1>UPLOAD HERE TO YOUR<br>ARTICLE THUMBNAIL<br>ACCEPT RATION WITH<br>16:9</h1>
+                </div>
                 <span class="intro-arrow">&#8250;</span>
                 <label class="thumbnail-upload" for="thumbnail-input">
                     <span class="upload-placeholder" aria-hidden="true">&#9673;</span>

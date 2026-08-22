@@ -17,7 +17,7 @@ if (!$user) {
 }
 
 $articleQuery = $pdo->prepare(
-    'SELECT id, thumbnail, short_dec, article, date FROM articles WHERE userid = :userid ORDER BY date DESC'
+    'SELECT id, title, thumbnail, category, short_dec, article, date FROM articles WHERE userid = :userid ORDER BY date DESC'
 );
 $articleQuery->execute(['userid' => $userId]);
 $articles = $articleQuery->fetchAll();
@@ -82,7 +82,8 @@ $articleCards = $articles ?: [null, null];
         <div class="article-card">
             <div class="article-item">
                 <?php foreach ($articleCards as $article):
-                    $articleTitle = $article ? (string) ($article['short_dec'] ?: 'Untitled article') : 'Your articles will appear here';
+                    $articleTitle = $article ? (string) ($article['title'] ?: 'Untitled article') : 'Your articles will appear here';
+                    $articleCategory = $article ? (string) ($article['category'] ?: 'Technology') : 'Technology';
                     $articleText = $article ? mb_substr((string) $article['article'], 0, 110) : 'Create a new article to see it on your profile.';
                     $articleDate = $article ? (string) $article['date'] : '';
                     $thumbnail = $article && !empty($article['thumbnail']) ? (string) $article['thumbnail'] : 'assets/sample.png';
@@ -90,7 +91,7 @@ $articleCards = $articles ?: [null, null];
                 <div class="editors-article"<?php if ($article): ?> onclick="window.location.href='article.php?id=<?php echo (int) $article['id']; ?>'"<?php endif; ?> >
                     <div class="lable"><div class="dot"></div><p>Latest</p></div>
                     <div class="post-image"><img src="<?php echo escapeOutput($thumbnail); ?>" alt="Post image"></div>
-                    <div class="category"><p>Technology</p></div>
+                    <div class="category"><p><?php echo escapeOutput($articleCategory); ?></p></div>
                     <div class="topic"><h2><?php echo escapeOutput($articleTitle); ?></h2></div>
                     <div class="short-description"><h3><?php echo escapeOutput($articleText); ?></h3></div>
                     <section class="article-profile">
