@@ -74,7 +74,7 @@ $articleCards = $articles ?: [null, null];
                 <a href="#"><img src="assets/icons/Medium.png" alt="articles"><p><?php echo count($articles); ?> Articles</p></a>
             </div>
             <div class="button-2">
-                <a href="article-upload.html"><h3>New article</h3><img src="assets/icons/facebook.png" alt="Add article"></a>
+                <a href="article-upload.php"><h3>New article</h3><img src="assets/icons/facebook.png" alt="Add article"></a>
                 <a href="logout.php"><h3>Log out</h3><img src="assets/icons/facebook.png" alt="Log out"></a>
                 <a href="#"><h3>Edit profile</h3><img src="assets/icons/facebook.png" alt="Edit profile"></a>
             </div>
