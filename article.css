@@ -760,10 +760,6 @@ responsive part
     }
 }
 
-/* responsive polish */
-* {
-    box-sizing: border-box;
-}
 
 img {
     max-width: 100%;
@@ -771,7 +767,6 @@ img {
 
 .logo img {
     display: block;
-    width: 118px;
     height: auto;
 }
 

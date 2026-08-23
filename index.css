@@ -14,6 +14,7 @@ header{
 .full-header{
     background-color:#040506;
     width: 100%;
+    height: 700px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -153,7 +154,7 @@ header button
     margin-left: 55px;
 }
 
-.text-vector .header-button .e-more , .s-down, .middile-bar .button{
+.text-vector .header-button .e-more , .s-down, .middile-bar .button a{
     display: inline-flex;
     align-items: center;
     color: #040506;
@@ -594,6 +595,7 @@ middle bar
 .middile-bar .button p{
     margin-left: 20px;
     margin-right: auto;
+    font-size: medium;
 }
 
 .middile-bar .button img{
@@ -915,9 +917,7 @@ footer .social img{
 }
 
 /* responsive layout - matched with article page */
-* {
-    box-sizing: border-box;
-}
+
 
 html,
 body {
@@ -931,7 +931,6 @@ img {
 
 .logo img {
     display: block;
-    width: 118px;
     height: auto;
 }
 

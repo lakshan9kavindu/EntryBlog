@@ -21,7 +21,7 @@ navigationbar
 
 .navigation{
     display: flex;
-    width: min(calc(100% - 40px), 1180px);
+    width: min(calc(100% - 40px), 1300px);
     margin-left: auto;
     margin-right: auto;
     padding-top: 30px;
@@ -269,13 +269,17 @@ navigationbar
 /*
 editor's article
 */
+.article-card {
+            margin-left: auto;
+
+}
+
 .article-card .article-item{
     display: flex;
     gap: 20px;
     margin-top: 50px;
     margin-left: auto;
     margin-right: auto;
-    width: 800px;
     height: 350px;
 }
 
@@ -632,10 +636,6 @@ footer .social img{
 }
 
 /* responsive layout - matched with article page */
-* {
-    box-sizing: border-box;
-}
-
 html,
 body {
     max-width: 100%;
@@ -648,7 +648,6 @@ img {
 
 .logo img {
     display: block;
-    width: 118px;
     height: auto;
 }
 

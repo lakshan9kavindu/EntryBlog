@@ -133,7 +133,8 @@ function renderArticleCard(?array $article, string $class): void
             <div class="article-cards">
                 <div class="top-layer">
                     <h1>Editors' Picks</h1>
-                    <div class="top-img"><img src="assets/icons/Down Button.png" alt="Next"><img
+                    <div class="top-img">
+                        <img
                             src="assets/icons/Down Button.png" alt="Previous"></div>
                 </div>
                 <div class="articles">
@@ -158,7 +159,7 @@ function renderArticleCard(?array $article, string $class): void
                 </a></div>
         </div>
     </section>
-    <section id="about">
+    <section>
         <div class="second-article">
             <div class="top">
                 <div class="title">
@@ -226,6 +227,10 @@ function renderArticleCard(?array $article, string $class): void
                     <div class="button">
                         <a class="b-2" href="login.html">
                             <p>Login or Sign up</p><img src="assets/icons/Down Button.png" alt="Login">
+                        </a>
+                        <a class="b-1" href="all-articles.php">
+                            <p>All Articles</p>
+                            <img src="assets/icons/Down Button.png" alt="All Articles">
                         </a>
                     </div>
                     <div class="social">

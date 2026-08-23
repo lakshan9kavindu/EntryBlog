@@ -55,6 +55,10 @@ function allArticleThumbnail(array $article): string
     <link rel="stylesheet" href="index.css">
     <title><?php echo escapeOutput($pageTitle); ?></title>
     <style>
+        .full-header {
+            height: fit-content;
+        }
+
         .all-articles-page {
             width: min(calc(100% - 40px), 1180px);
             margin: 55px auto 90px;

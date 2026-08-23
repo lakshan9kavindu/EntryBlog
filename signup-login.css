@@ -10,9 +10,6 @@
     --muted: #777777;
 }
 
-* {
-    box-sizing: border-box;
-}
 
 html,
 body {
@@ -40,7 +37,7 @@ img {
 
 .navigation {
     display: flex;
-    width: min(calc(100% - 40px), 1180px);
+    width: min(calc(100% - 40px), 1300px);
     padding-top: 30px;
     margin: 0 auto;
 }
@@ -55,7 +52,6 @@ img {
 
 .logo img {
     display: block;
-    width: 118px;
     height: auto;
 }
 
