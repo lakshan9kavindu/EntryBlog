@@ -146,14 +146,15 @@ if ($saveTable !== null) {
     <link rel="stylesheet" href="article.css">
     <title><?php echo escapeOutput($title); ?></title>
 </head>
-<body>
+<body data-authenticated="<?php echo $currentUserId !== null ? 'true' : 'false'; ?>">
     <div class="full-header"><section class="navigation"><div class="navbar">
-        <div class="logo"><img src="assets/logo/logo.png" alt="Logo"></div>
+        <div class="logo"><a href="index.php"><img src="assets/logo/logo.png" alt="Logo"></a></div>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img src="assets/icons/profile-icon.png" alt="Menu"></button>
         <div class="nav-links"><ul>
             <li class="active"><a href="index.php">Home</a></li><li><a href="index.php#categories">Categories</a></li><li><a href="index.php#about">About us</a></li><li><a href="index.php#contact">Contact</a></li>
         </ul></div>
         <div class="search-bar"><input type="text" placeholder="Search..."><img src="assets/icons/Search-white.png" alt="Search Icon"></div>
-        <div class="user-profile"><img src="assets/icons/login-black.png" alt="User Icon"></div>
+        <div class="user-profile" data-hide-when-authenticated="true"><a href="login.html"><img src="assets/icons/login-black.png" alt="User Icon"></a></div>
     </div></section></div>
 
     <div class="thumbnail-container"><div class="thumbnail"><div class="top">
@@ -169,6 +170,7 @@ if ($saveTable !== null) {
         <div class="profile"><div class="profile-image"><img src="assets/sample-dp.png" alt="Profile Image"></div><div class="profile-info"><h3><?php echo escapeOutput($author); ?></h3><p><?php echo escapeOutput($date); ?></p></div><form class="follow-btn" method="POST"><input type="hidden" name="csrf_token" value="<?php echo escapeOutput(csrfToken()); ?>"><button type="submit" name="action" value="follow"><?php echo $isFollowed ? 'Following' : 'Follow'; ?></button><img src="assets/icons/Vector 2.png" alt="Follow Icon"></form><form class="like-btn" method="POST"><input type="hidden" name="csrf_token" value="<?php echo escapeOutput(csrfToken()); ?>"><button type="submit" name="action" value="like"><?php echo $isLiked ? 'Liked' : 'Like'; ?></button><img src="assets/icons/Vector 2.png" alt="Like Icon"></form><form class="save-btn" method="POST"><input type="hidden" name="csrf_token" value="<?php echo escapeOutput(csrfToken()); ?>"><button type="submit" name="action" value="save" <?php echo $saveTable === null ? 'disabled' : ''; ?>><?php echo $isSaved ? 'Saved' : 'Save'; ?></button><img src="assets/icons/Vector 2.png" alt="Save Icon"></form></div>
     </div>
 
-    <section class="footer-1"><footer><div class="component"><div class="first"><img src="assets/logo/logo.png" alt="logo"><div class="text-1"><p>Upload your own blog articles</p><p class="bold">to read everyone with us</p></div><div class="copiright"><p>© 2026 EntryBlog. All rights reserved.</p></div></div><div class="second"><img src="assets/icons/Vector 2.png" alt="Decoration"></div><div class="third"><div class="page"><ul><li><a href="index.php">Home</a></li><li><a href="index.php#categories">Categories</a></li><li><a href="index.php#about">About us</a></li><li><a href="index.php#contact">Contact</a></li></ul></div><div class="button"><div class="b-2"><p>Login or Sign up</p><img src="assets/icons/Down Button.png" alt="Login or sign up"></div></div><div class="social"><p>Connect with us</p><img src="assets/icons/facebook.png" alt="Facebook"><img src="assets/icons/Instagram Circle.png" alt="Instagram"><img src="assets/icons/Medium.png" alt="Medium"></div></div></div></footer></section>
+    <section class="footer-1"><footer><div class="component"><div class="first"><img src="assets/logo/logo.png" alt="logo"><div class="text-1"><p>Upload your own blog articles</p><p class="bold">to read everyone with us</p></div><div class="copiright"><p>© 2026 EntryBlog. All rights reserved.</p></div></div><div class="second"><img src="assets/icons/Vector 2.png" alt="Decoration"></div><div class="third"><div class="page"><ul><li><a href="index.php">Home</a></li><li><a href="index.php#categories">Categories</a></li><li><a href="index.php#about">About us</a></li><li><a href="index.php#contact">Contact</a></li></ul></div><div class="button"><a class="b-2" href="login.html"><p>Login or Sign up</p><img src="assets/icons/Down Button.png" alt="Login or sign up"></a></div><div class="social"><p>Connect with us</p><img src="assets/icons/facebook.png" alt="Facebook"><img src="assets/icons/Instagram Circle.png" alt="Instagram"><img src="assets/icons/Medium.png" alt="Medium"></div></div></div></footer></section>
 </body>
+<script src="navbar.js"></script>
 </html>

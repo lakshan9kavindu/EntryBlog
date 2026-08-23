@@ -4,9 +4,11 @@ declare(strict_types=1);
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/auth.php';
 
+startUserSession();
+
 $category = trim((string) ($_GET['category'] ?? ''));
 $ownerOnly = ($_GET['owner'] ?? '') === '1';
-$userId = null;
+$userId = isset($_SESSION['user_id']) && is_int($_SESSION['user_id']) ? (int) $_SESSION['user_id'] : null;
 
 if ($ownerOnly) {
     $userId = requireUser();
@@ -60,7 +62,7 @@ function allArticleThumbnail(array $article): string
 
         .all-articles-heading {
             display: flex;
-            align-items: end;
+            align-items: flex-end;
             justify-content: space-between;
             margin-bottom: 30px;
         }
@@ -103,28 +105,48 @@ function allArticleThumbnail(array $article): string
         }
 
         @media (max-width: 560px) {
+            .all-articles-page {
+                width: min(calc(100% - 28px), 620px);
+                margin: 30px auto 50px;
+            }
+
             .all-articles-heading {
                 display: block;
             }
 
             .all-articles-heading h1 {
-                font-size: 30px;
+                font-size: 28px;
                 margin-bottom: 8px;
             }
 
             .all-articles-grid {
                 grid-template-columns: 1fr;
             }
+
+            .all-articles-grid .editors-article {
+                height: 360px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .all-articles-heading h1 {
+                font-size: 24px;
+            }
+
+            .all-articles-empty {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 
-<body>
+<body data-authenticated="<?php echo $userId !== null ? 'true' : 'false'; ?>">
     <header>
         <div class="full-header">
             <section class="navigation">
                 <div class="navbar">
-                    <div class="logo"><img src="assets/logo/logo.png" alt="Logo"></div>
+                    <div class="logo"><a href="index.php"><img src="assets/logo/logo.png" alt="Logo"></a></div>
+                    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img src="assets/icons/profile-icon.png" alt="Menu"></button>
                     <div class="nav-links">
                         <ul>
                             <li><a href="index.php">Home</a></li>
@@ -135,7 +157,7 @@ function allArticleThumbnail(array $article): string
                     </div>
                     <div class="search-bar"><input type="text" placeholder="Search..."><img
                             src="assets/icons/Search-white.png" alt="Search Icon"></div>
-                    <div class="user-profile"><a href="login.html"><img src="assets/icons/login-black.png"
+                    <div class="user-profile" data-hide-when-authenticated="true"><a href="login.html"><img src="assets/icons/login-black.png"
                                 alt="Login"></a></div>
                 </div>
             </section>
@@ -208,9 +230,9 @@ function allArticleThumbnail(array $article): string
                         </ul>
                     </div>
                     <div class="button">
-                        <div class="b-2">
+                        <a class="b-2" href="login.html">
                             <p>Login or Sign up</p><img src="assets/icons/Down Button.png" alt="Login">
-                        </div>
+                        </a>
                     </div>
                     <div class="social">
                         <p>Connect with us</p><img src="assets/icons/facebook.png" alt="Facebook"><img
@@ -222,5 +244,6 @@ function allArticleThumbnail(array $article): string
         </footer>
     </section>
 </body>
+<script src="navbar.js"></script>
 
 </html>

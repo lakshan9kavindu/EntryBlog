@@ -536,3 +536,357 @@ footer .social img{
         justify-content: flex-start;
     }
 }
+
+/*
+responsive part
+*/
+
+@media (max-width: 900px) {
+    .navigation,
+    .thumbnail,
+    .artcle-content,
+    footer {
+        width: min(calc(100% - 36px), 700px);
+    }
+
+    .navbar {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+
+    .nav-links {
+        order: 3;
+        flex-basis: 100%;
+        overflow-x: auto;
+    }
+
+    .nav-links ul {
+        justify-content: flex-start;
+        gap: 24px;
+        padding-bottom: 6px;
+    }
+
+    .search-bar {
+        width: 150px;
+        margin-left: auto;
+    }
+
+    .thumbnail {
+        padding-top: 35px;
+    }
+
+    .thumbnail .top {
+        grid-template-columns: 30px minmax(0, 1fr) 30px;
+        gap: 12px;
+    }
+
+    .thumbnail .top .image img {
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+
+    .title h1 {
+        font-size: clamp(28px, 7vw, 48px);
+    }
+
+    footer .component {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+
+    footer .second {
+        display: none;
+    }
+
+    footer .first {
+        width: auto;
+    }
+
+    footer .page {
+        margin-left: 0;
+    }
+
+    footer .page ul {
+        flex-wrap: wrap;
+        gap: 16px 25px;
+    }
+
+    footer .social {
+        margin-left: 0;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 560px) {
+    .nav-links ul {
+        gap: 18px;
+    }
+
+    .thumbnail .top {
+        grid-template-columns: 24px minmax(0, 1fr) 24px;
+    }
+
+    .thumbnail .top > .back-btn img,
+    .thumbnail .top > .save img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .some-btn {
+        gap: 8px;
+    }
+
+    .some-btn .btn {
+        flex: 1 1 120px;
+        justify-content: center;
+    }
+
+    .artcle-content {
+        padding-top: 35px;
+    }
+
+    .profile {
+        gap: 8px;
+    }
+
+    footer .component {
+        grid-template-columns: 1fr;
+    }
+}
+
+.menu-toggle {
+    display: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.menu-toggle img {
+    display: block;
+    width: 32px;
+    height: 32px;
+}
+
+@media (max-width: 560px) {
+    .navbar { position: relative; }
+    .menu-toggle { display: block; order: 2; margin-left: auto; }
+    .navbar .user-profile { order: 3; }
+    .navbar .search-bar, .navbar .nav-links { display: none; }
+    .navbar.menu-open .nav-links { display: block; order: 4; width: 100%; padding: 14px 0; border-top: 1px solid #444; background: #040506; }
+    .navbar.menu-open .nav-links ul { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+    .navbar.menu-open .nav-links li a { display: block; padding: 12px 8px; text-align: center; }
+    .navbar.menu-open .search-bar { display: flex; order: 5; width: 100%; margin: 0; }
+}
+
+
+
+@media (max-width: 760px) {
+    .navigation,
+    .thumbnail,
+    .artcle-content,
+    footer {
+        width: min(calc(100% - 36px), 600px);
+    }
+
+    .navigation {
+        padding-top: 22px;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+
+    .nav-links {
+        order: 3;
+        flex-basis: 100%;
+        overflow-x: auto;
+    }
+
+    .nav-links ul {
+        justify-content: flex-start;
+        gap: 24px;
+    }
+
+    .search-bar {
+        width: 130px;
+        margin-left: auto;
+    }
+
+    .thumbnail {
+        padding-top: 35px;
+    }
+
+    .thumbnail .top {
+        grid-template-columns: 30px 1fr 30px;
+        gap: 10px;
+    }
+
+    .thumbnail .top .image img {
+        height: 130px;
+    }
+
+    .some-btn {
+        gap: 10px;
+    }
+
+    .artcle-content {
+        padding-top: 35px;
+    }
+
+    .profile {
+        flex-wrap: wrap;
+    }
+
+    footer .component {
+        grid-template-columns: 1fr;
+    }
+
+    footer .second {
+        display: none;
+    }
+
+    footer .page ul {
+        flex-wrap: wrap;
+    }
+
+    footer .button,
+    footer .social {
+        justify-content: flex-start;
+    }
+}
+
+/* responsive polish */
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+}
+
+.logo img {
+    display: block;
+    width: 118px;
+    height: auto;
+}
+
+@media (max-width: 1180px) {
+    .navigation,
+    .thumbnail,
+    .thumbnail .top,
+    .artcle-content {
+        width: min(calc(100% - 40px), 1040px);
+    }
+
+    footer {
+        width: 100%;
+        height: auto;
+    }
+
+    footer .component {
+        width: min(calc(100% - 40px), 1040px);
+    }
+}
+
+@media (max-width: 760px) {
+    .navigation,
+    .thumbnail,
+    .thumbnail .top,
+    .artcle-content {
+        width: min(calc(100% - 28px), 620px);
+    }
+
+    .thumbnail-container {
+        padding-bottom: 34px;
+    }
+
+    .middle {
+        width: min(calc(100% - 28px), 620px);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .title h1 {
+        overflow-wrap: anywhere;
+    }
+
+    .content {
+        font-size: 15px;
+        line-height: 1.55;
+    }
+
+    .profile {
+        align-items: stretch;
+    }
+
+    .profile-info {
+        min-width: 0;
+        flex: 1 1 calc(100% - 52px);
+    }
+
+    .profile-info h3 {
+        overflow-wrap: anywhere;
+    }
+
+    .follow-btn,
+    .like-btn,
+    .save-btn {
+        min-height: 32px;
+    }
+
+    .footer-1 {
+        border-radius: 38px 38px 0 0;
+    }
+
+    footer .component {
+        width: min(calc(100% - 28px), 620px);
+        padding: 24px 0 30px;
+    }
+
+    footer .first,
+    footer .third {
+        width: 100%;
+    }
+
+    footer .copiright p {
+        margin-top: 28px;
+    }
+
+    footer .page ul {
+        padding-left: 0;
+    }
+
+    footer .button {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 420px) {
+    .logo img {
+        width: 96px;
+    }
+
+    .thumbnail .top {
+        grid-template-columns: 22px minmax(0, 1fr) 22px;
+    }
+
+    .some-btn .btn {
+        flex-basis: calc(50% - 5px);
+    }
+
+    .profile {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+    }
+
+    .follow-btn,
+    .like-btn,
+    .save-btn {
+        justify-content: center;
+    }
+}

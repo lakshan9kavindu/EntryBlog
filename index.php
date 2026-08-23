@@ -4,6 +4,9 @@ declare(strict_types=1);
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/auth.php';
 
+startUserSession();
+$currentUserId = isset($_SESSION['user_id']) && is_int($_SESSION['user_id']) ? (int) $_SESSION['user_id'] : null;
+
 $articleQuery = $pdo->query(
     'SELECT a.id, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email
      FROM articles a JOIN users u ON u.id = a.userid ORDER BY a.date DESC'
@@ -53,12 +56,13 @@ function renderArticleCard(?array $article, string $class): void
     <title>EntryBlog</title>
 </head>
 
-<body>
+<body data-authenticated="<?php echo $currentUserId !== null ? 'true' : 'false'; ?>">
     <header>
         <div class="full-header">
             <section class="navigation">
                 <div class="navbar">
-                    <div class="logo"><img src="assets/logo/logo.png" alt="Logo"></div>
+                    <div class="logo"><a href="index.php"><img src="assets/logo/logo.png" alt="Logo"></a></div>
+                    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img src="assets/icons/profile-icon.png" alt="Menu"></button>
                     <div class="nav-links">
                         <ul>
                             <li class="active"><a href="index.php">Home</a></li>
@@ -69,7 +73,7 @@ function renderArticleCard(?array $article, string $class): void
                     </div>
                     <div class="search-bar"><input type="text" placeholder="Search..."><img
                             src="assets/icons/Search-white.png" alt="Search Icon"></div>
-                    <div class="user-profile"><a href="login.html"><img src="assets/icons/login-black.png"
+                    <div class="user-profile" data-hide-when-authenticated="true"><a href="login.html"><img src="assets/icons/login-black.png"
                                 alt="Login"></a></div>
                 </div>
             </section>
@@ -141,7 +145,7 @@ function renderArticleCard(?array $article, string $class): void
     </section>
     <section>
         <div class="middile-bar">
-            <div class="profile-icon"><img src="/assets/icons/profile-icon.png" alt="Profile"></div>
+            <div class="profile-icon"><img src="assets/icons/profile-icon.png" alt="Profile"></div>
             <div class="main-text">
                 <p>Upload your own blog articles</p>
                 <h1>to read everyone with us</h1>
@@ -220,9 +224,9 @@ function renderArticleCard(?array $article, string $class): void
                         </ul>
                     </div>
                     <div class="button">
-                        <div class="b-2">
+                        <a class="b-2" href="login.html">
                             <p>Login or Sign up</p><img src="assets/icons/Down Button.png" alt="Login">
-                        </div>
+                        </a>
                     </div>
                     <div class="social">
                         <p>Connect with us</p><img src="assets/icons/facebook.png" alt="Facebook"><img
@@ -234,5 +238,6 @@ function renderArticleCard(?array $article, string $class): void
         </footer>
     </section>
 </body>
+<script src="navbar.js"></script>
 
 </html>

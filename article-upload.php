@@ -120,11 +120,12 @@ $currentThumbnail = (string) ($editArticle['thumbnail'] ?? '');
     <link rel="stylesheet" href="article-upload.css">
     <title>Upload Article</title>
 </head>
-<body>
+<body data-authenticated="true">
     <div class="full-header">
         <section class="navigation">
             <div class="navbar">
-                <div class="logo"><img src="assets/logo/logo.png" alt="Logo"></div>
+                <div class="logo"><a href="index.php"><img src="assets/logo/logo.png" alt="Logo"></a></div>
+                <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img src="assets/icons/profile-icon.png" alt="Menu"></button>
                 <div class="nav-links"><ul>
                     <li class="active"><a href="index.php">Home</a></li>
                     <li><a href="index.php#categories">Categories</a></li>
@@ -196,5 +197,6 @@ $currentThumbnail = (string) ($editArticle['thumbnail'] ?? '');
             placeholder.hidden = true;
         });
     </script>
+    <script src="navbar.js"></script>
 </body>
 </html>

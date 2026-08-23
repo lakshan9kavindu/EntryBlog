@@ -40,17 +40,18 @@ $articleCards = array_slice($articles, 0, 2);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="profile.css">
-    <title>Profile</title>
+    <title>Profile - EntryBlog</title>
 </head>
 
-<body>
+<body data-authenticated="true">
     <header>
         <div class="full-header">
             <section class="navigation">
                 <div class="navbar">
                     <div class="logo">
-                        <img src="assets/logo/logo.png" alt="Logo">
+                        <a href="index.php"><img src="assets/logo/logo.png" alt="Logo"></a>
                     </div>
+                    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img src="assets/icons/profile-icon.png" alt="Menu"></button>
                     <div class="nav-links">
                         <ul>
                             <li class="active"><a href="index.php">Home</a></li>
@@ -120,7 +121,7 @@ $articleCards = array_slice($articles, 0, 2);
         <footer>
             <div class="component">
                 <div class="first">
-                    <img src="assets/logo/logo.png" alt="logo">
+                    <img src="assets/logo/logo.png" alt="Logo">
                     <div class="text-1">
                         <p>Upload your own blog articles</p>
                         <p class="bold">to read everyone with us</p>
@@ -142,14 +143,14 @@ $articleCards = array_slice($articles, 0, 2);
                         </ul>
                     </div>
                     <div class="button">
-                        <div class="b-1">
+                        <a class="b-1" href="all-articles.php">
                             <p>All articles</p>
-                            <img src="assets/icons/Down Button.png" alt="Explore more">
-                        </div>
-                        <div class="b-2">
-                            <p>Login or Sign up</p>
-                            <img src="assets/icons/Down Button.png" alt="Explore more">
-                        </div>
+                            <img src="assets/icons/Down Button.png" alt="All articles">
+                        </a>
+                        <a class="b-2" href="logout.php">
+                            <p>Log out</p>
+                            <img src="assets/icons/Down Button.png" alt="Log out">
+                        </a>
                     </div>
                     <div class="social">
                         <p>Connect with us</p>
@@ -162,5 +163,6 @@ $articleCards = array_slice($articles, 0, 2);
         </footer>
     </section>
 </body>
+<script src="navbar.js"></script>
 
 </html>

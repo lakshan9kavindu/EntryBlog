@@ -10,7 +10,7 @@ header
 
 .full-header{
     background-color:#040506;
-    width: 1300px;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -21,6 +21,9 @@ navigationbar
 
 .navigation{
     display: flex;
+    width: min(calc(100% - 40px), 1180px);
+    margin-left: auto;
+    margin-right: auto;
     padding-top: 30px;
 }
 
@@ -174,7 +177,7 @@ navigationbar
 
 .first-card{
     display: flex;
-    width: 1300px;
+    width: min(calc(100% - 40px), 1180px);
     margin-left: auto;
     margin-right: auto;
 }
@@ -626,4 +629,315 @@ footer .social img{
     margin-right: 20px;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+/* responsive layout - matched with article page */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+.logo img {
+    display: block;
+    width: 118px;
+    height: auto;
+}
+
+.menu-toggle {
+    display: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.menu-toggle img {
+    display: block;
+    width: 32px;
+    height: 32px;
+}
+
+.view-articles {
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 12px;
+}
+
+.view-articles h3 {
+    margin-right: 8px;
+}
+
+@media (max-width: 1180px) {
+    .full-header,
+    .first-card,
+    .profile-page {
+        width: min(calc(100% - 40px), 1040px);
+    }
+
+    .first-card {
+        gap: 28px;
+    }
+
+    .article-card {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .article-card .article-item {
+        width: 100%;
+        height: auto;
+        flex-wrap: wrap;
+    }
+
+    .article-card .article-item .editors-article {
+        flex: 1 1 280px;
+    }
+
+    footer {
+        width: 100%;
+        height: auto;
+    }
+
+    footer .component {
+        width: min(calc(100% - 40px), 1040px);
+    }
+}
+
+@media (max-width: 900px) {
+    .full-header,
+    .first-card,
+    .profile-page {
+        width: min(calc(100% - 36px), 700px);
+    }
+
+    .navbar {
+        width: 100%;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .nav-links {
+        order: 3;
+        flex-basis: 100%;
+        overflow-x: auto;
+    }
+
+    .nav-links ul {
+        justify-content: flex-start;
+        gap: 24px;
+        padding: 0 4px 6px;
+    }
+
+    .search-bar {
+        width: 150px;
+        margin-left: auto;
+    }
+
+    .first-card {
+        display: block;
+    }
+
+    .first-card .pro-card {
+        width: min(100%, 420px);
+        height: auto;
+        min-height: 0;
+        margin: 35px auto 0;
+        padding: 24px 16px;
+    }
+
+    .pro-card h3 {
+        overflow-wrap: anywhere;
+        text-align: center;
+    }
+
+    .article-card .article-item {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 28px;
+    }
+
+    .article-card .article-item .editors-article {
+        width: 100%;
+        height: 380px;
+    }
+
+    .view-articles {
+        width: 100%;
+    }
+
+    footer .component {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+
+    footer .first,
+    footer .third {
+        width: auto;
+    }
+
+    footer .second {
+        display: none;
+    }
+
+    footer .page {
+        margin-left: 0;
+    }
+
+    footer .page ul {
+        flex-wrap: wrap;
+        gap: 16px 25px;
+        padding-left: 0;
+    }
+
+    footer .social {
+        margin-left: 0;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 560px) {
+    .navigation {
+        padding-top: 22px;
+    }
+
+    .logo img {
+        width: 96px;
+    }
+
+    .navbar {
+        position: relative;
+    }
+
+    .menu-toggle {
+        display: block;
+        order: 2;
+        margin-left: auto;
+    }
+
+    .navbar .user-profile {
+        order: 3;
+    }
+
+    .navbar .search-bar,
+    .navbar .nav-links {
+        display: none;
+    }
+
+    .navbar.menu-open .nav-links {
+        display: block;
+        order: 4;
+        width: 100%;
+        padding: 14px 0;
+        border-top: 1px solid #444;
+        background: #040506;
+    }
+
+    .navbar.menu-open .nav-links ul {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .navbar.menu-open .nav-links li a {
+        display: block;
+        padding: 12px 8px;
+        text-align: center;
+    }
+
+    .navbar.menu-open .search-bar {
+        display: flex;
+        order: 5;
+        width: 100%;
+        margin: 0;
+    }
+
+    .first-card,
+    .profile-page {
+        width: min(calc(100% - 28px), 620px);
+    }
+
+    .pro-card .button {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .pro-card .button a,
+    .pro-card .button-2 a {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .article-card .article-item {
+        grid-template-columns: 1fr;
+    }
+
+    .article-card .article-item .editors-article {
+        height: 350px;
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    .article-profile {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .article-profile .reading-time,
+    .article-profile .down-icon {
+        display: none;
+    }
+
+    .footer-1 {
+        border-radius: 38px 38px 0 0;
+    }
+
+    footer .component {
+        grid-template-columns: 1fr;
+        width: min(calc(100% - 28px), 620px);
+        padding: 24px 0 30px;
+    }
+
+    footer .copiright p {
+        margin-top: 28px;
+    }
+
+    footer .button {
+        flex-wrap: wrap;
+    }
+
+    footer .button .b-1,
+    footer .button .b-2 {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .logo img {
+        width: 90px;
+    }
+
+    .pro-card h3 {
+        font-size: 16px;
+    }
+
+    .pro-card .button a,
+    .pro-card .button-2 a {
+        font-size: 11px;
+    }
 }
