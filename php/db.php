@@ -28,6 +28,11 @@ try {
         PDO::ATTR_EMULATE_PREPARES => false,
     ]);
 
+    $userColumns = $pdo->query('SHOW COLUMNS FROM users')->fetchAll(PDO::FETCH_COLUMN);
+    if (!in_array('dp', $userColumns, true)) {
+        $pdo->exec("ALTER TABLE users ADD COLUMN dp VARCHAR(255) NULL DEFAULT NULL AFTER email");
+    }
+
     $articleColumns = $pdo->query('SHOW COLUMNS FROM articles')->fetchAll(PDO::FETCH_COLUMN);
     if (!in_array('title', $articleColumns, true)) {
         $pdo->exec("ALTER TABLE articles ADD COLUMN title VARCHAR(255) NOT NULL DEFAULT '' AFTER id");

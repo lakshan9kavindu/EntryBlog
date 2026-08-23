@@ -8,7 +8,7 @@ startUserSession();
 $currentUserId = isset($_SESSION['user_id']) && is_int($_SESSION['user_id']) ? (int) $_SESSION['user_id'] : null;
 
 $articleQuery = $pdo->query(
-    'SELECT a.id, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email
+    'SELECT a.id, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email, u.dp
      FROM articles a JOIN users u ON u.id = a.userid ORDER BY a.date DESC'
 );
 $articles = $articleQuery->fetchAll();
@@ -40,6 +40,11 @@ function articleThumbnail(?array $article): string
     $path = (string) ($article['thumbnail'] ?? '');
     return preg_match('/^uploads\/[a-f0-9]{32}\.(jpg|png|webp)$/', $path) ? escapeOutput('../' . $path) : '../assets/sample.png';
 }
+function articleAuthorDp(?array $article): string
+{
+    $path = (string) ($article['dp'] ?? '');
+    return !empty($path) ? escapeOutput('../' . $path) : '../assets/sample-dp.png';
+}
 function renderArticleCard(?array $article, string $class): void
 {
     $id = $article ? (int) $article['id'] : 0;
@@ -49,13 +54,14 @@ function renderArticleCard(?array $article, string $class): void
     $author = articleValue($article, 'email', 'EntryBlog');
     $date = articleValue($article, 'date', '');
     $thumbnail = articleThumbnail($article);
+    $authorDp = articleAuthorDp($article);
     $click = $id > 0 ? " onclick=\"window.location.href='article.php?id={$id}'\"" : '';
     echo "<div class=\"{$class}\"{$click}>";
     echo '<div class="lable"><div class="dot"></div><p>Latest</p></div>';
     echo "<div class=\"post-image\"><img src=\"{$thumbnail}\" alt=\"Post image\"></div>";
     echo "<div class=\"category\"><p>{$category}</p></div><div class=\"topic\"><h2>{$title}</h2></div>";
     echo "<div class=\"short-description\"><h3>{$description}</h3></div>";
-    echo '<section class="article-profile"><div class="profile-dp"><img src="../assets/sample-dp.png" alt="Profile image"></div>';
+    echo "<section class=\"article-profile\"><div class=\"profile-dp\"><img src=\"{$authorDp}\" alt=\"Profile image\"></div>";
     echo "<div class=\"author-name\"><p>{$author}</p></div><div class=\"publish-date\"><p>{$date}</p></div><div class=\"reading-time\"><p>5 min read</p></div></section></div>";
 }
 ?>

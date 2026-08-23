@@ -51,11 +51,11 @@ $requestedId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, [
 
 if ($requestedId === false || $requestedId === null) {
     $articleQuery = $pdo->query(
-        'SELECT a.id, a.userid, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email FROM articles a JOIN users u ON u.id = a.userid ORDER BY a.date DESC LIMIT 1'
+        'SELECT a.id, a.userid, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email, u.dp FROM articles a JOIN users u ON u.id = a.userid ORDER BY a.date DESC LIMIT 1'
     );
 } else {
     $articleQuery = $pdo->prepare(
-        'SELECT a.id, a.userid, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email FROM articles a JOIN users u ON u.id = a.userid WHERE a.id = :id LIMIT 1'
+        'SELECT a.id, a.userid, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email, u.dp FROM articles a JOIN users u ON u.id = a.userid WHERE a.id = :id LIMIT 1'
     );
     $articleQuery->execute(['id' => $requestedId]);
 }
@@ -110,6 +110,7 @@ $shortDescription = (string) ($article['short_dec'] ?: '');
 $content = (string) $article['article'];
 $thumbnail = !empty($article['thumbnail']) && preg_match('/^uploads\/[a-f0-9]{32}\.(jpg|png|webp)$/', (string) $article['thumbnail']) ? '../' . $article['thumbnail'] : '../assets/sample.png';
 $author = (string) $article['email'];
+$authorDp = !empty($article['dp']) ? '../' . $article['dp'] : '../assets/sample-dp.png';
 $date = (string) $article['date'];
 
 $likeCountQuery = $pdo->prepare('SELECT COUNT(*) FROM likes WHERE articleid = :articleid');
@@ -165,6 +166,8 @@ if ($saveTable !== null) {
                 </div>
                 <div class="search-bar"><input type="text" placeholder="Search..."><img
                         src="../assets/icons/Search-white.png" alt="Search Icon"></div>
+                <div class="user-profile" data-hide-when-authenticated="true"><a href="login.html"><img
+                            src="../assets/icons/login-black.png" alt="User Icon"></a></div>
             </div>
         </section>
     </div>
@@ -205,7 +208,7 @@ if ($saveTable !== null) {
             <p><?php echo nl2br(escapeOutput($content)); ?></p>
         </div>
         <div class="profile">
-            <div class="profile-image"><img src="../assets/sample-dp.png" alt="Profile Image"></div>
+            <div class="profile-image"><img src="<?php echo escapeOutput($authorDp); ?>" alt="Profile Image"></div>
             <div class="profile-info">
                 <h3><?php echo escapeOutput($author); ?></h3>
                 <p><?php echo escapeOutput($date); ?></p>
