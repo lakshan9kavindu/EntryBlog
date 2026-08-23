@@ -4,9 +4,11 @@ declare(strict_types=1);
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/auth.php';
 
+startUserSession();
+
 $category = trim((string) ($_GET['category'] ?? ''));
 $ownerOnly = ($_GET['owner'] ?? '') === '1';
-$userId = null;
+$userId = isset($_SESSION['user_id']) && is_int($_SESSION['user_id']) ? (int) $_SESSION['user_id'] : null;
 
 if ($ownerOnly) {
     $userId = requireUser();
@@ -41,7 +43,7 @@ function allArticleValue(array $article, string $key, string $fallback = ''): st
 function allArticleThumbnail(array $article): string
 {
     $path = (string) ($article['thumbnail'] ?? '');
-    return preg_match('/^uploads\/[a-f0-9]{32}\.(jpg|png|webp)$/', $path) ? escapeOutput($path) : 'assets/sample.png';
+    return preg_match('/^uploads\/[a-f0-9]{32}\.(jpg|png|webp)$/', $path) ? escapeOutput('../' . $path) : '../assets/sample.png';
 }
 ?>
 <!DOCTYPE html>
@@ -50,9 +52,13 @@ function allArticleThumbnail(array $article): string
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../css/index.css">
     <title><?php echo escapeOutput($pageTitle); ?></title>
     <style>
+        .full-header {
+            height: fit-content;
+        }
+
         .all-articles-page {
             width: min(calc(100% - 40px), 1180px);
             margin: 55px auto 90px;
@@ -60,7 +66,7 @@ function allArticleThumbnail(array $article): string
 
         .all-articles-heading {
             display: flex;
-            align-items: end;
+            align-items: flex-end;
             justify-content: space-between;
             margin-bottom: 30px;
         }
@@ -93,38 +99,77 @@ function allArticleThumbnail(array $article): string
             padding: 50px;
             border-radius: 20px;
             background: #f7f5f4;
-            color: #777;
+            color: #040506;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
         }
 
         @media (max-width: 850px) {
+            .all-articles-page {
+                width: min(calc(100% - 36px), 700px);
+                margin: 40px auto 60px;
+            }
+
+            .all-articles-heading h1 {
+                font-size: 32px;
+            }
+
             .all-articles-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 18px;
+            }
+
+            .all-articles-grid .editors-article {
+                height: 380px;
             }
         }
 
         @media (max-width: 560px) {
+            .all-articles-page {
+                width: min(calc(100% - 28px), 620px);
+                margin: 30px auto 50px;
+            }
+
             .all-articles-heading {
-                display: block;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
             }
 
             .all-articles-heading h1 {
-                font-size: 30px;
-                margin-bottom: 8px;
+                font-size: 28px;
             }
 
             .all-articles-grid {
                 grid-template-columns: 1fr;
             }
+
+            .all-articles-grid .editors-article {
+                height: 360px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .all-articles-heading h1 {
+                font-size: 24px;
+            }
+
+            .all-articles-empty {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 
-<body>
+<body data-authenticated="<?php echo $userId !== null ? 'true' : 'false'; ?>">
     <header>
         <div class="full-header">
             <section class="navigation">
                 <div class="navbar">
-                    <div class="logo"><img src="assets/logo/logo.png" alt="Logo"></div>
+                    <div class="logo"><a href="index.php"><img src="../assets/logo/logo.png" alt="Logo"></a></div>
+                    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img
+                            src="../assets/icons/profile-icon.png" alt="Menu"></button>
                     <div class="nav-links">
                         <ul>
                             <li><a href="index.php">Home</a></li>
@@ -134,9 +179,8 @@ function allArticleThumbnail(array $article): string
                         </ul>
                     </div>
                     <div class="search-bar"><input type="text" placeholder="Search..."><img
-                            src="assets/icons/Search-white.png" alt="Search Icon"></div>
-                    <div class="user-profile"><a href="login.html"><img src="assets/icons/login-black.png"
-                                alt="Login"></a></div>
+                            src="../assets/icons/Search-white.png" alt="Search Icon"></div>
+
                 </div>
             </section>
         </div>
@@ -169,7 +213,7 @@ function allArticleThumbnail(array $article): string
                             <h3><?php echo allArticleValue($article, 'short_dec', ''); ?></h3>
                         </div>
                         <section class="article-profile">
-                            <div class="profile-dp"><img src="assets/sample-dp.png" alt="Profile image"></div>
+                            <div class="profile-dp"><img src="../assets/sample-dp.png" alt="Profile image"></div>
                             <div class="author-name">
                                 <p><?php echo allArticleValue($article, 'email', 'EntryBlog'); ?></p>
                             </div>
@@ -188,7 +232,7 @@ function allArticleThumbnail(array $article): string
     <section class="footer-1" id="contact">
         <footer>
             <div class="component">
-                <div class="first"><img src="assets/logo/logo.png" alt="Logo">
+                <div class="first"><img src="../assets/logo/logo.png" alt="Logo">
                     <div class="text-1">
                         <p>Upload your own blog articles</p>
                         <p class="bold">to read everyone with us</p>
@@ -197,7 +241,7 @@ function allArticleThumbnail(array $article): string
                         <p>© 2026 EntryBlog. All rights reserved.</p>
                     </div>
                 </div>
-                <div class="second"><img src="assets/icons/Vector 2.png" alt="Decoration"></div>
+                <div class="second"><img src="../assets/icons/Vector 2.png" alt="Decoration"></div>
                 <div class="third">
                     <div class="page">
                         <ul>
@@ -208,19 +252,20 @@ function allArticleThumbnail(array $article): string
                         </ul>
                     </div>
                     <div class="button">
-                        <div class="b-2">
-                            <p>Login or Sign up</p><img src="assets/icons/Down Button.png" alt="Login">
-                        </div>
+                        <a class="b-2" href="login.html">
+                            <p>Login or Sign up</p><img src="../assets/icons/Down Button.png" alt="Login">
+                        </a>
                     </div>
                     <div class="social">
-                        <p>Connect with us</p><img src="assets/icons/facebook.png" alt="Facebook"><img
-                            src="assets/icons/Instagram Circle.png" alt="Instagram"><img src="assets/icons/Medium.png"
-                            alt="Medium">
+                        <p>Connect with us</p><img src="../assets/icons/facebook.png" alt="Facebook"><img
+                            src="../assets/icons/Instagram Circle.png" alt="Instagram"><img
+                            src="../assets/icons/Medium.png" alt="Medium">
                     </div>
                 </div>
             </div>
         </footer>
     </section>
 </body>
+<script src="../js/navbar.js"></script>
 
 </html>

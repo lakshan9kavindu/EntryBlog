@@ -1,4 +1,4 @@
-body{
+body {
     font-family: sans-serif;
     margin: 0;
 }
@@ -7,12 +7,12 @@ body{
 header
 */
 
-header{
+header {
     background-color: #040506;
 }
 
-.full-header{
-    background-color:#040506;
+.full-header {
+    background-color: #040506;
     margin-left: auto;
     margin-right: auto;
 }
@@ -21,15 +21,15 @@ header{
 navigationbar
 */
 
-.navigation{
+.navigation {
     display: flex;
-    width: 1300px;
+    width: min(calc(100% - 40px), 1300px);
     padding-top: 30px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.navbar{
+.navbar {
     display: inline-flex;
     margin-left: auto;
     margin-right: auto;
@@ -37,31 +37,31 @@ navigationbar
     gap: 30px;
 }
 
-.nav-links{
+.nav-links {
     margin-left: auto;
     margin-right: 30px;
 }
 
-.nav-links ul{
+.nav-links ul {
     list-style: none;
     display: inline-flex;
     gap: 70px;
 }
 
-.nav-links .active{
+.nav-links .active {
     font-size: larger;
-    font-weight:bolder;
+    font-weight: bolder;
     text-decoration: underline #F7F5F4;
 }
 
-.nav-links ul li a{
+.nav-links ul li a {
     color: #F7F5F4;
     text-decoration: none;
 }
 
-.search-bar{
+.search-bar {
     margin-right: auto;
-        margin: auto;
+    margin: auto;
 
     margin-left: 50px;
     display: inline-flex;
@@ -73,31 +73,28 @@ navigationbar
     height: 15px;
 }
 
-.search-bar img{
+.search-bar img {
     width: 30px;
     height: 30px;
     margin-top: -6px;
     margin-bottom: auto
 }
 
-.search-bar input[type=text]{
+.search-bar input[type=text] {
     height: 15px;
     border-radius: 50px;
     background-color: #040506;
     border: none;
 }
 
-.user-profile img{
-    margin:auto;
+.user-profile img {
+    margin: auto;
     width: auto;
     height: 45px;
 }
 
 /* upload content */
 
-* {
-    box-sizing: border-box;
-}
 
 body {
     background: #f7f5f4;
@@ -233,11 +230,11 @@ body {
 }
 
 .intro-arrow {
-    width: 42px;
-    height: 42px;
+    margin-left: auto;
+    width: 30px;
+    height: 30px;
     color: #f7f5f4;
     background: #3e3e3e;
-    font-size: 34px;
     line-height: 1;
 }
 
@@ -311,8 +308,8 @@ body {
 }
 
 .upload-message.error {
-    color:#fdc63e;
-    background:#888;
+    color: #fdc63e;
+    background: #888;
 }
 
 .thumbnail-preview {
@@ -331,7 +328,6 @@ body {
     display: flex;
     align-items: center;
     gap: 16px;
-    margin: 22px 0 45px auto;
     padding: 10px 12px 10px 20px;
     border: 0;
     border-radius: 24px;
@@ -359,6 +355,7 @@ body {
     align-items: center;
     justify-content: flex-end;
     gap: 14px;
+    margin-top: 22px;
 }
 
 .upload-actions .submit-article {
@@ -415,5 +412,218 @@ body {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+    }
+}
+
+/* responsive layout - matched with article page */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+.logo img {
+    display: block;
+    height: auto;
+}
+
+.menu-toggle {
+    display: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.menu-toggle img {
+    display: block;
+    width: 32px;
+    height: 32px;
+}
+
+.category-bar {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+
+    .navigation,
+    .upload-page {
+        width: min(calc(100% - 40px), 1040px);
+    }
+}
+
+@media (max-width: 900px) {
+
+    .navigation,
+    .upload-page {
+        width: min(calc(100% - 36px), 700px);
+    }
+
+    .full-header {
+        width: 100%;
+    }
+
+    .navbar {
+        width: 100%;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .nav-links {
+        order: 3;
+        flex-basis: 100%;
+        overflow-x: auto;
+    }
+
+    .nav-links ul {
+        justify-content: flex-start;
+        gap: 24px;
+        padding: 0 4px 6px;
+    }
+
+    .search-bar {
+        width: 150px;
+        margin-left: auto;
+    }
+
+    .upload-intro {
+        width: 100%;
+        grid-template-columns: minmax(0, 1fr) 34px minmax(220px, 320px);
+    }
+}
+
+@media (max-width: 560px) {
+
+    .navigation,
+    .upload-page {
+        width: min(calc(100% - 28px), 620px);
+    }
+
+    .navigation {
+        padding-top: 22px;
+    }
+
+    .logo img {
+        width: 96px;
+    }
+
+    .navbar {
+        position: relative;
+    }
+
+    .menu-toggle {
+        display: block;
+        order: 2;
+        margin-left: auto;
+    }
+
+    .navbar .user-profile {
+        display: none;
+    }
+
+    .navbar .search-bar,
+    .navbar .nav-links {
+        display: none;
+    }
+
+    .navbar.menu-open .nav-links {
+        display: block;
+        order: 4;
+        width: 100%;
+        padding: 14px 0;
+        border-top: 1px solid #444;
+        background: #040506;
+    }
+
+    .navbar.menu-open .nav-links ul {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .navbar.menu-open .nav-links li a {
+        display: block;
+        padding: 12px 8px;
+        text-align: center;
+    }
+
+    .navbar.menu-open .search-bar {
+        display: flex;
+        order: 5;
+        width: 100%;
+        margin: 0;
+    }
+
+    .upload-page {
+        margin-top: 18px;
+    }
+
+    .category-bar {
+        justify-content: flex-start;
+        padding: 0 12px;
+    }
+
+    .upload-intro {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .intro-arrow {
+        display: none;
+    }
+
+    .thumbnail-upload {
+        height: 150px;
+    }
+
+    .editor-toolbar {
+        gap: 12px;
+        padding: 0 12px;
+    }
+
+    .editor-toolbar button:nth-of-type(n + 6) {
+        display: none;
+    }
+
+    .editor textarea {
+        min-height: 240px;
+        height: 280px;
+        padding: 16px;
+    }
+
+    .upload-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: stretch;
+    }
+
+    .upload-actions .submit-article,
+    .delete-article,
+    .submit-article {
+        justify-content: center;
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 420px) {
+    .logo img {
+        width: 90px;
+    }
+
+    .category-bar {
+        font-size: 9px;
+    }
+
+    .editor textarea {
+        padding: 12px;
     }
 }

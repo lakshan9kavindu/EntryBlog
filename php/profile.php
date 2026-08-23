@@ -39,18 +39,20 @@ $articleCards = array_slice($articles, 0, 2);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="profile.css">
-    <title>Profile</title>
+    <link rel="stylesheet" href="../css/profile.css">
+    <title>Profile - EntryBlog</title>
 </head>
 
-<body>
+<body data-authenticated="true">
     <header>
         <div class="full-header">
             <section class="navigation">
                 <div class="navbar">
                     <div class="logo">
-                        <img src="assets/logo/logo.png" alt="Logo">
+                        <a href="index.php"><img src="../assets/logo/logo.png" alt="Logo"></a>
                     </div>
+                    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img
+                            src="../assets/icons/profile-icon.png" alt="Menu"></button>
                     <div class="nav-links">
                         <ul>
                             <li class="active"><a href="index.php">Home</a></li>
@@ -61,10 +63,7 @@ $articleCards = array_slice($articles, 0, 2);
                     </div>
                     <div class="search-bar">
                         <input type="text" placeholder="Search...">
-                        <img src="assets/icons/Search-white.png" alt="Search Icon">
-                    </div>
-                    <div class="user-profile">
-                        <a href="logout.php"><img src="assets/icons/login-black.png" alt="Log out"></a>
+                        <img src="../assets/icons/Search-white.png" alt="Search Icon">
                     </div>
                 </div>
             </section>
@@ -73,17 +72,27 @@ $articleCards = array_slice($articles, 0, 2);
 
     <section class="first-card">
         <div class="pro-card">
-            <img src="assets/sample-dp.png" alt="Profile image">
+            <img src="../assets/sample-dp.png" alt="Profile image">
             <h3><?php echo $displayEmail; ?></h3>
             <p>Member account</p>
             <div class="button">
-                <a href="#"><img src="assets/icons/facebook.png" alt="followers"><p><?php echo $followersCount; ?> Followers</p></a>
-                <a href="#"><img src="assets/icons/Instagram Circle.png" alt="followings"><p><?php echo $followingCount; ?> Following</p></a>
-                <a href="#"><img src="assets/icons/Medium.png" alt="articles"><p><?php echo count($articles); ?> Articles</p></a>
+                <a href="#"><img src="../assets/icons/facebook.png" alt="followers">
+                    <p><?php echo $followersCount; ?> Followers</p>
+                </a>
+                <a href="#"><img src="../assets/icons/Instagram Circle.png" alt="followings">
+                    <p><?php echo $followingCount; ?> Following</p>
+                </a>
+                <a href="#"><img src="../assets/icons/Medium.png" alt="articles">
+                    <p><?php echo count($articles); ?> Articles</p>
+                </a>
             </div>
             <div class="button-2">
-                <a href="article-upload.php"><h3>New article</h3><img src="assets/icons/facebook.png" alt="Add article"></a>
-                <a href="logout.php"><h3>Log out</h3><img src="assets/icons/facebook.png" alt="Log out"></a>
+                <a href="article-upload.php">
+                    <h3>New article</h3><img src="../assets/icons/facebook.png" alt="Add article">
+                </a>
+                <a href="logout.php">
+                    <h3>Log out</h3><img src="../assets/icons/facebook.png" alt="Log out">
+                </a>
             </div>
         </div>
         <div class="article-card">
@@ -93,25 +102,43 @@ $articleCards = array_slice($articles, 0, 2);
                     $articleCategory = $article ? (string) ($article['category'] ?: 'Technology') : 'Technology';
                     $articleText = $article ? mb_substr((string) $article['article'], 0, 110) : 'Create a new article to see it on your profile.';
                     $articleDate = $article ? (string) $article['date'] : '';
-                    $thumbnail = $article && !empty($article['thumbnail']) ? (string) $article['thumbnail'] : 'assets/sample.png';
-                ?>
-                <div class="editors-article"<?php if ($article): ?> onclick="window.location.href='article.php?id=<?php echo (int) $article['id']; ?>'"<?php endif; ?> >
-                    <div class="lable"><div class="dot"></div><p>Latest</p></div>
-                    <div class="post-image"><img src="<?php echo escapeOutput($thumbnail); ?>" alt="Post image"></div>
-                    <div class="category"><p><?php echo escapeOutput($articleCategory); ?></p></div>
-                    <div class="topic"><h2><?php echo escapeOutput($articleTitle); ?></h2></div>
-                    <div class="short-description"><h3><?php echo escapeOutput($articleText); ?></h3></div>
-                    <section class="article-profile">
-                        <div class="profile-dp"><img src="assets/sample-dp.png" alt="Profile image"></div>
-                        <div class="author-name"><p><?php echo $displayEmail; ?></p></div>
-                        <div class="publish-date"><p><?php echo escapeOutput($articleDate); ?></p></div>
-                        <div class="reading-time"><p>5 min read</p></div>
-                    </section>
-                </div>
+                    $thumbnail = $article && !empty($article['thumbnail']) && preg_match('/^uploads\/[a-f0-9]{32}\.(jpg|png|webp)$/', (string) $article['thumbnail']) ? '../' . $article['thumbnail'] : '../assets/sample.png';
+                    ?>
+                    <div class="editors-article" <?php if ($article): ?>
+                            onclick="window.location.href='article.php?id=<?php echo (int) $article['id']; ?>'" <?php endif; ?>>
+                        <div class="lable">
+                            <div class="dot"></div>
+                            <p>Latest</p>
+                        </div>
+                        <div class="post-image"><img src="<?php echo escapeOutput($thumbnail); ?>" alt="Post image"></div>
+                        <div class="category">
+                            <p><?php echo escapeOutput($articleCategory); ?></p>
+                        </div>
+                        <div class="topic">
+                            <h2><?php echo escapeOutput($articleTitle); ?></h2>
+                        </div>
+                        <div class="short-description">
+                            <h3><?php echo escapeOutput($articleText); ?></h3>
+                        </div>
+                        <section class="article-profile">
+                            <div class="profile-dp"><img src="../assets/sample-dp.png" alt="Profile image"></div>
+                            <div class="author-name">
+                                <p><?php echo $displayEmail; ?></p>
+                            </div>
+                            <div class="publish-date">
+                                <p><?php echo escapeOutput($articleDate); ?></p>
+                            </div>
+                            <div class="reading-time">
+                                <p>5 min read</p>
+                            </div>
+                        </section>
+                    </div>
                 <?php endforeach; ?>
             </div>
             <div class="view-articles-container">
-                <a href="all-articles.php?owner=1" class="view-articles"><h3>Your Articles</h3><img src="assets/icons/Down Button.png" alt="Your articles"></a>
+                <a href="all-articles.php?owner=1" class="view-articles">
+                    <h3>Your Articles</h3><img src="../assets/icons/Down Button.png" alt="Your articles">
+                </a>
             </div>
         </div>
     </section>
@@ -120,7 +147,7 @@ $articleCards = array_slice($articles, 0, 2);
         <footer>
             <div class="component">
                 <div class="first">
-                    <img src="assets/logo/logo.png" alt="logo">
+                    <img src="../assets/logo/logo.png" alt="Logo">
                     <div class="text-1">
                         <p>Upload your own blog articles</p>
                         <p class="bold">to read everyone with us</p>
@@ -130,7 +157,7 @@ $articleCards = array_slice($articles, 0, 2);
                     </div>
                 </div>
                 <div class="second">
-                    <img src="assets/icons/Vector 2.png" alt="Decoration">
+                    <img src="../assets/icons/Vector 2.png" alt="Decoration">
                 </div>
                 <div class="third">
                     <div class="page">
@@ -142,25 +169,26 @@ $articleCards = array_slice($articles, 0, 2);
                         </ul>
                     </div>
                     <div class="button">
-                        <div class="b-1">
+                        <a class="b-1" href="all-articles.php">
                             <p>All articles</p>
-                            <img src="assets/icons/Down Button.png" alt="Explore more">
-                        </div>
-                        <div class="b-2">
-                            <p>Login or Sign up</p>
-                            <img src="assets/icons/Down Button.png" alt="Explore more">
-                        </div>
+                            <img src="../assets/icons/Down Button.png" alt="All articles">
+                        </a>
+                        <a class="b-2" href="logout.php">
+                            <p>Log out</p>
+                            <img src="../assets/icons/Down Button.png" alt="Log out">
+                        </a>
                     </div>
                     <div class="social">
                         <p>Connect with us</p>
-                        <img src="assets/icons/facebook.png" alt="Facebook">
-                        <img src="assets/icons/Instagram Circle.png" alt="Instagram">
-                        <img src="assets/icons/Medium.png" alt="Medium">
+                        <img src="../assets/icons/facebook.png" alt="Facebook">
+                        <img src="../assets/icons/Instagram Circle.png" alt="Instagram">
+                        <img src="../assets/icons/Medium.png" alt="Medium">
                     </div>
                 </div>
             </div>
         </footer>
     </section>
 </body>
+<script src="../js/navbar.js"></script>
 
 </html>

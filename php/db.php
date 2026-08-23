@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-$environmentFile = __DIR__ . '/.env';
+$environmentFile = is_file(__DIR__ . '/.env') ? __DIR__ . '/.env' : dirname(__DIR__) . '/.env';
 $environment = is_file($environmentFile)
     ? parse_ini_file($environmentFile, false, INI_SCANNER_RAW)
     : [];
