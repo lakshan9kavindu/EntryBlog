@@ -1,15 +1,23 @@
 <?php
 declare(strict_types=1);
 
-$environmentFile = is_file(__DIR__ . '/.env') ? __DIR__ . '/.env' : dirname(__DIR__) . '/.env';
-$environment = is_file($environmentFile)
+$environmentFile = is_file(dirname(__DIR__) . '/.env')
+    ? dirname(__DIR__) . '/.env'
+    : (is_file(__DIR__ . '/.env') ? __DIR__ . '/.env' : null);
+
+$environment = ($environmentFile !== null && is_readable($environmentFile))
     ? parse_ini_file($environmentFile, false, INI_SCANNER_RAW)
     : [];
 
-$databaseHost = $environment['DB_HOST'] ?? getenv('DB_HOST') ?: '127.0.0.1';
-$databaseName = $environment['DB_NAME'] ?? getenv('DB_NAME') ?: 'blog_system';
-$databaseUser = $environment['DB_USER'] ?? getenv('DB_USER') ?: 'root';
-$databasePassword = $environment['DB_PASSWORD'] ?? getenv('DB_PASSWORD') ?: '';
+$databaseHost = (string) ($environment['DB_HOST'] ?? getenv('DB_HOST') ?? '');
+$databaseName = (string) ($environment['DB_NAME'] ?? getenv('DB_NAME') ?? '');
+$databaseUser = (string) ($environment['DB_USER'] ?? getenv('DB_USER') ?? '');
+$databasePassword = (string) ($environment['DB_PASSWORD'] ?? getenv('DB_PASSWORD') ?? '');
+
+if ($databaseHost === '' || $databaseName === '' || $databaseUser === '') {
+    http_response_code(500);
+    exit('Database configuration missing. Please ensure DB_HOST, DB_NAME, and DB_USER are defined in your .env file.');
+}
 
 $databaseDsn = "mysql:host={$databaseHost};dbname={$databaseName};charset=utf8mb4";
 
@@ -39,5 +47,5 @@ try {
     );
 } catch (PDOException $exception) {
     http_response_code(500);
-    exit('Database connection failed. Import blog-system.sql and check your XAMPP MySQL settings.');
+    exit('Database connection failed. Check your .env database credentials and MySQL status.');
 }
