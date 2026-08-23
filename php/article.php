@@ -108,7 +108,7 @@ $title = (string) ($article['title'] ?: 'Untitled article');
 $category = (string) ($article['category'] ?: 'Technology');
 $shortDescription = (string) ($article['short_dec'] ?: '');
 $content = (string) $article['article'];
-$thumbnail = (string) ($article['thumbnail'] ?: 'assets/sample.png');
+$thumbnail = !empty($article['thumbnail']) && preg_match('/^uploads\/[a-f0-9]{32}\.(jpg|png|webp)$/', (string) $article['thumbnail']) ? '../' . $article['thumbnail'] : '../assets/sample.png';
 $author = (string) $article['email'];
 $date = (string) $article['date'];
 
@@ -144,7 +144,7 @@ if ($saveTable !== null) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="article.css">
+    <link rel="stylesheet" href="../css/article.css">
     <title><?php echo escapeOutput($title); ?></title>
 </head>
 
@@ -152,9 +152,9 @@ if ($saveTable !== null) {
     <div class="full-header">
         <section class="navigation">
             <div class="navbar">
-                <div class="logo"><a href="index.php"><img src="assets/logo/logo.png" alt="Logo"></a></div>
+                <div class="logo"><a href="index.php"><img src="../assets/logo/logo.png" alt="Logo"></a></div>
                 <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img
-                        src="assets/icons/profile-icon.png" alt="Menu"></button>
+                        src="../assets/icons/profile-icon.png" alt="Menu"></button>
                 <div class="nav-links">
                     <ul>
                         <li class="active"><a href="index.php">Home</a></li>
@@ -164,9 +164,7 @@ if ($saveTable !== null) {
                     </ul>
                 </div>
                 <div class="search-bar"><input type="text" placeholder="Search..."><img
-                        src="assets/icons/Search-white.png" alt="Search Icon"></div>
-                <div class="user-profile" data-hide-when-authenticated="true"><a href="login.html"><img
-                            src="assets/icons/login-black.png" alt="User Icon"></a></div>
+                        src="../assets/icons/Search-white.png" alt="Search Icon"></div>
             </div>
         </section>
     </div>
@@ -174,10 +172,10 @@ if ($saveTable !== null) {
     <div class="thumbnail-container">
         <div class="thumbnail">
             <div class="top">
-                <div class="back-btn"><a href="index.php"><img src="assets/icons/Scroll Down.png" alt="Back Button"></a>
+                <div class="back-btn"><a href="index.php"><img src="../assets/icons/Scroll Down.png" alt="Back Button"></a>
                 </div>
                 <div class="image"><img src="<?php echo escapeOutput($thumbnail); ?>" alt="Article thumbnail"></div>
-                <div class="save"><img src="assets/icons/save-icon.png" alt="Save Icon"></div>
+                <div class="save"><img src="../assets/icons/save-icon.png" alt="Save Icon"></div>
             </div>
         </div>
         <div class="middle">
@@ -185,16 +183,16 @@ if ($saveTable !== null) {
                 <h1><?php echo escapeOutput($title); ?></h1>
             </div>
             <div class="some-btn">
-                <div class="btn"><img src="assets/icons/like.png" alt="Like Icon">
+                <div class="btn"><img src="../assets/icons/like.png" alt="Like Icon">
                     <p><?php echo escapeOutput($category); ?></p>
                 </div>
-                <div class="btn"><img src="assets/icons/like.png" alt="Like Icon">
+                <div class="btn"><img src="../assets/icons/like.png" alt="Like Icon">
                     <p><?php echo $likeCount; ?> Likes</p>
                 </div>
-                <div class="btn"><img src="assets/icons/share.png" alt="Share Icon">
+                <div class="btn"><img src="../assets/icons/share.png" alt="Share Icon">
                     <p><?php echo $followerCount; ?> Followers</p>
                 </div>
-                <div class="btn"><img src="assets/icons/save-icon.png" alt="Bookmark Icon">
+                <div class="btn"><img src="../assets/icons/save-icon.png" alt="Bookmark Icon">
                     <p><?php echo $saveCount; ?> Saved</p>
                 </div>
             </div>
@@ -207,7 +205,7 @@ if ($saveTable !== null) {
             <p><?php echo nl2br(escapeOutput($content)); ?></p>
         </div>
         <div class="profile">
-            <div class="profile-image"><img src="assets/sample-dp.png" alt="Profile Image"></div>
+            <div class="profile-image"><img src="../assets/sample-dp.png" alt="Profile Image"></div>
             <div class="profile-info">
                 <h3><?php echo escapeOutput($author); ?></h3>
                 <p><?php echo escapeOutput($date); ?></p>
@@ -215,14 +213,14 @@ if ($saveTable !== null) {
             <form class="follow-btn" method="POST"><input type="hidden" name="csrf_token"
                     value="<?php echo escapeOutput(csrfToken()); ?>"><button type="submit" name="action"
                     value="follow"><?php echo $isFollowed ? 'Following' : 'Follow'; ?></button><img
-                    src="assets/icons/Vector 2.png" alt="Follow Icon"></form>
+                    src="../assets/icons/Vector 2.png" alt="Follow Icon"></form>
             <form class="like-btn" method="POST"><input type="hidden" name="csrf_token"
                     value="<?php echo escapeOutput(csrfToken()); ?>"><button type="submit" name="action"
-                    value="like"><?php echo $isLiked ? 'Liked' : 'Like'; ?></button><img src="assets/icons/Vector 2.png"
+                    value="like"><?php echo $isLiked ? 'Liked' : 'Like'; ?></button><img src="../assets/icons/Vector 2.png"
                     alt="Like Icon"></form>
             <form class="save-btn" method="POST"><input type="hidden" name="csrf_token"
                     value="<?php echo escapeOutput(csrfToken()); ?>"><button type="submit" name="action" value="save"
-                    <?php echo $saveTable === null ? 'disabled' : ''; ?>><?php echo $isSaved ? 'Saved' : 'Save'; ?></button><img src="assets/icons/Vector 2.png"
+                    <?php echo $saveTable === null ? 'disabled' : ''; ?>><?php echo $isSaved ? 'Saved' : 'Save'; ?></button><img src="../assets/icons/Vector 2.png"
                     alt="Save Icon"></form>
         </div>
     </div>
@@ -230,7 +228,7 @@ if ($saveTable !== null) {
     <section class="footer-1">
         <footer>
             <div class="component">
-                <div class="first"><img src="assets/logo/logo.png" alt="logo">
+                <div class="first"><img src="../assets/logo/logo.png" alt="logo">
                     <div class="text-1">
                         <p>Upload your own blog articles</p>
                         <p class="bold">to read everyone with us</p>
@@ -239,7 +237,7 @@ if ($saveTable !== null) {
                         <p>© 2026 EntryBlog. All rights reserved.</p>
                     </div>
                 </div>
-                <div class="second"><img src="assets/icons/Vector 2.png" alt="Decoration"></div>
+                <div class="second"><img src="../assets/icons/Vector 2.png" alt="Decoration"></div>
                 <div class="third">
                     <div class="page">
                         <ul>
@@ -250,11 +248,11 @@ if ($saveTable !== null) {
                         </ul>
                     </div>
                     <div class="button"><a class="b-2" href="login.html">
-                            <p>Login or Sign up</p><img src="assets/icons/Down Button.png" alt="Login or sign up">
+                            <p>Login or Sign up</p><img src="../assets/icons/Down Button.png" alt="Login or sign up">
                         </a></div>
                     <div class="social">
-                        <p>Connect with us</p><img src="assets/icons/facebook.png" alt="Facebook"><img
-                            src="assets/icons/Instagram Circle.png" alt="Instagram"><img src="assets/icons/Medium.png"
+                        <p>Connect with us</p><img src="../assets/icons/facebook.png" alt="Facebook"><img
+                            src="../assets/icons/Instagram Circle.png" alt="Instagram"><img src="../assets/icons/Medium.png"
                             alt="Medium">
                     </div>
                 </div>
@@ -262,6 +260,6 @@ if ($saveTable !== null) {
         </footer>
     </section>
 </body>
-<script src="navbar.js"></script>
+<script src="../js/navbar.js"></script>
 
 </html>

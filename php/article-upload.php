@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $deleteArticle->execute(['id' => $postedEditId, 'userid' => $userId]);
         $oldThumbnail = (string) ($articleToDelete['thumbnail'] ?? '');
         if (preg_match('/^uploads\/[a-f0-9]{32}\.(jpg|png|webp)$/', $oldThumbnail)) {
-            @unlink(__DIR__ . '/' . $oldThumbnail);
+            @unlink(dirname(__DIR__) . '/' . $oldThumbnail);
         }
         header('Location: profile.php?deleted=1');
         exit;
@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $databasePath = $editArticle['thumbnail'] ?? null;
             if ($hasNewThumbnail) {
-                $uploadDirectory = __DIR__ . '/uploads';
+                $uploadDirectory = dirname(__DIR__) . '/uploads';
                 if (!is_dir($uploadDirectory)) mkdir($uploadDirectory, 0750, true);
                 $fileName = bin2hex(random_bytes(16)) . '.' . $allowedTypes[$mimeType];
                 $storedPath = $uploadDirectory . '/' . $fileName;
@@ -117,15 +117,15 @@ $currentThumbnail = (string) ($editArticle['thumbnail'] ?? '');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="article-upload.css">
+    <link rel="stylesheet" href="../css/article-upload.css">
     <title>Upload Article</title>
 </head>
 <body data-authenticated="true">
     <div class="full-header">
         <section class="navigation">
             <div class="navbar">
-                <div class="logo"><a href="index.php"><img src="assets/logo/logo.png" alt="Logo"></a></div>
-                <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img src="assets/icons/profile-icon.png" alt="Menu"></button>
+                <div class="logo"><a href="index.php"><img src="../assets/logo/logo.png" alt="Logo"></a></div>
+                <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img src="../assets/icons/profile-icon.png" alt="Menu"></button>
                 <div class="nav-links"><ul>
                     <li class="active"><a href="index.php">Home</a></li>
                     <li><a href="index.php#categories">Categories</a></li>
@@ -134,9 +134,8 @@ $currentThumbnail = (string) ($editArticle['thumbnail'] ?? '');
                 </ul></div>
                 <div class="search-bar">
                     <input type="text" placeholder="Search...">
-                    <img src="assets/icons/Search-white.png" alt="Search Icon">
+                    <img src="../assets/icons/Search-white.png" alt="Search Icon">
                 </div>
-                <div class="user-profile"><a href="logout.php"><img src="assets/icons/login-black.png" alt="Log out"></a></div>
             </div>
         </section>
     </div>
@@ -168,7 +167,7 @@ $currentThumbnail = (string) ($editArticle['thumbnail'] ?? '');
                 <span class="intro-arrow">&#8250;</span>
                 <label class="thumbnail-upload" for="thumbnail-input">
                     <span class="upload-placeholder" aria-hidden="true"<?php if ($currentThumbnail !== ''): ?> hidden<?php endif; ?>>&#9673;</span>
-                    <img class="thumbnail-preview" alt="Selected thumbnail preview"<?php if ($currentThumbnail !== ''): ?> src="<?php echo escapeOutput($currentThumbnail); ?>"<?php else: ?> hidden<?php endif; ?>>
+                    <img class="thumbnail-preview" alt="Selected thumbnail preview"<?php if ($currentThumbnail !== ''): ?> src="<?php echo escapeOutput('../' . $currentThumbnail); ?>"<?php else: ?> hidden<?php endif; ?>>
                     <input id="thumbnail-input" name="thumbnail" type="file" accept="image/jpeg,image/png,image/webp"<?php if (!$editArticle): ?> required<?php endif; ?>>
                 </label>
             </section>
@@ -198,6 +197,6 @@ $currentThumbnail = (string) ($editArticle['thumbnail'] ?? '');
             placeholder.hidden = true;
         });
     </script>
-    <script src="navbar.js"></script>
+    <script src="../js/navbar.js"></script>
 </body>
 </html>
