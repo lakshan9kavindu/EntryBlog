@@ -27,7 +27,7 @@ if ($ownerOnly) {
 
 $where = $conditions ? ' WHERE ' . implode(' AND ', $conditions) : '';
 $articleQuery = $pdo->prepare(
-    'SELECT a.id, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email
+    'SELECT a.id, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email, u.dp
      FROM articles a JOIN users u ON u.id = a.userid' . $where . ' ORDER BY a.date DESC'
 );
 $articleQuery->execute($parameters);
@@ -44,6 +44,12 @@ function allArticleThumbnail(array $article): string
 {
     $path = (string) ($article['thumbnail'] ?? '');
     return preg_match('/^uploads\/[a-f0-9]{32}\.(jpg|png|webp)$/', $path) ? escapeOutput('../' . $path) : '../assets/sample.png';
+}
+
+function allArticleAuthorDp(array $article): string
+{
+    $path = (string) ($article['dp'] ?? '');
+    return !empty($path) ? escapeOutput('../' . $path) : '../assets/sample-dp.png';
 }
 ?>
 <!DOCTYPE html>
@@ -180,7 +186,8 @@ function allArticleThumbnail(array $article): string
                     </div>
                     <div class="search-bar"><input type="text" placeholder="Search..."><img
                             src="../assets/icons/Search-white.png" alt="Search Icon"></div>
-
+                    <div class="user-profile" data-hide-when-authenticated="true"><a href="login.html"><img
+                                src="../assets/icons/login-black.png" alt="Login"></a></div>
                 </div>
             </section>
         </div>
@@ -213,7 +220,7 @@ function allArticleThumbnail(array $article): string
                             <h3><?php echo allArticleValue($article, 'short_dec', ''); ?></h3>
                         </div>
                         <section class="article-profile">
-                            <div class="profile-dp"><img src="../assets/sample-dp.png" alt="Profile image"></div>
+                            <div class="profile-dp"><img src="<?php echo allArticleAuthorDp($article); ?>" alt="Profile image"></div>
                             <div class="author-name">
                                 <p><?php echo allArticleValue($article, 'email', 'EntryBlog'); ?></p>
                             </div>
@@ -266,6 +273,6 @@ function allArticleThumbnail(array $article): string
         </footer>
     </section>
 </body>
-<script src="../js/navbar.js"></script>
+<script src="../js/navbar.js?v=<?php echo file_exists(__DIR__ . '/../js/navbar.js') ? filemtime(__DIR__ . '/../js/navbar.js') : time(); ?>"></script>
 
 </html>

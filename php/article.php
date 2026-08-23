@@ -51,11 +51,11 @@ $requestedId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT, [
 
 if ($requestedId === false || $requestedId === null) {
     $articleQuery = $pdo->query(
-        'SELECT a.id, a.userid, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email FROM articles a JOIN users u ON u.id = a.userid ORDER BY a.date DESC LIMIT 1'
+        'SELECT a.id, a.userid, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email, u.dp FROM articles a JOIN users u ON u.id = a.userid ORDER BY a.date DESC LIMIT 1'
     );
 } else {
     $articleQuery = $pdo->prepare(
-        'SELECT a.id, a.userid, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email FROM articles a JOIN users u ON u.id = a.userid WHERE a.id = :id LIMIT 1'
+        'SELECT a.id, a.userid, a.title, a.thumbnail, a.category, a.short_dec, a.article, a.date, u.email, u.dp FROM articles a JOIN users u ON u.id = a.userid WHERE a.id = :id LIMIT 1'
     );
     $articleQuery->execute(['id' => $requestedId]);
 }
@@ -110,6 +110,7 @@ $shortDescription = (string) ($article['short_dec'] ?: '');
 $content = (string) $article['article'];
 $thumbnail = !empty($article['thumbnail']) && preg_match('/^uploads\/[a-f0-9]{32}\.(jpg|png|webp)$/', (string) $article['thumbnail']) ? '../' . $article['thumbnail'] : '../assets/sample.png';
 $author = (string) $article['email'];
+$authorDp = !empty($article['dp']) ? '../' . $article['dp'] : '../assets/sample-dp.png';
 $date = (string) $article['date'];
 
 $likeCountQuery = $pdo->prepare('SELECT COUNT(*) FROM likes WHERE articleid = :articleid');
@@ -165,6 +166,8 @@ if ($saveTable !== null) {
                 </div>
                 <div class="search-bar"><input type="text" placeholder="Search..."><img
                         src="../assets/icons/Search-white.png" alt="Search Icon"></div>
+                <div class="user-profile" data-hide-when-authenticated="true"><a href="login.html"><img
+                            src="../assets/icons/login-black.png" alt="User Icon"></a></div>
             </div>
         </section>
     </div>
@@ -183,13 +186,13 @@ if ($saveTable !== null) {
                 <h1><?php echo escapeOutput($title); ?></h1>
             </div>
             <div class="some-btn">
-                <div class="btn"><img src="../assets/icons/like.png" alt="Like Icon">
+                <div class="btn"><img src="../assets/icons/vector-6.png" alt="Category Icon">
                     <p><?php echo escapeOutput($category); ?></p>
                 </div>
-                <div class="btn"><img src="../assets/icons/like.png" alt="Like Icon">
+                <div class="btn"><img src="../assets/icons/vector-3.png" alt="Like Icon">
                     <p><?php echo $likeCount; ?> Likes</p>
                 </div>
-                <div class="btn"><img src="../assets/icons/share.png" alt="Share Icon">
+                <div class="btn"><img src="../assets/icons/scroll down.png" alt="Follow Icon">
                     <p><?php echo $followerCount; ?> Followers</p>
                 </div>
                 <div class="btn"><img src="../assets/icons/save-icon.png" alt="Bookmark Icon">
@@ -205,7 +208,7 @@ if ($saveTable !== null) {
             <p><?php echo nl2br(escapeOutput($content)); ?></p>
         </div>
         <div class="profile">
-            <div class="profile-image"><img src="../assets/sample-dp.png" alt="Profile Image"></div>
+            <div class="profile-image"><img src="<?php echo escapeOutput($authorDp); ?>" alt="Profile Image"></div>
             <div class="profile-info">
                 <h3><?php echo escapeOutput($author); ?></h3>
                 <p><?php echo escapeOutput($date); ?></p>
@@ -213,14 +216,14 @@ if ($saveTable !== null) {
             <form class="follow-btn" method="POST"><input type="hidden" name="csrf_token"
                     value="<?php echo escapeOutput(csrfToken()); ?>"><button type="submit" name="action"
                     value="follow"><?php echo $isFollowed ? 'Following' : 'Follow'; ?></button><img
-                    src="../assets/icons/Vector 2.png" alt="Follow Icon"></form>
+                    src="../assets/icons/scroll down.png" alt="Follow Icon"></form>
             <form class="like-btn" method="POST"><input type="hidden" name="csrf_token"
                     value="<?php echo escapeOutput(csrfToken()); ?>"><button type="submit" name="action"
-                    value="like"><?php echo $isLiked ? 'Liked' : 'Like'; ?></button><img src="../assets/icons/Vector 2.png"
+                    value="like"><?php echo $isLiked ? 'Liked' : 'Like'; ?></button><img src="../assets/icons/vector.png"
                     alt="Like Icon"></form>
             <form class="save-btn" method="POST"><input type="hidden" name="csrf_token"
                     value="<?php echo escapeOutput(csrfToken()); ?>"><button type="submit" name="action" value="save"
-                    <?php echo $saveTable === null ? 'disabled' : ''; ?>><?php echo $isSaved ? 'Saved' : 'Save'; ?></button><img src="../assets/icons/Vector 2.png"
+                    <?php echo $saveTable === null ? 'disabled' : ''; ?>><?php echo $isSaved ? 'Saved' : 'Save'; ?></button><img src="../assets/icons/save-icon.png"
                     alt="Save Icon"></form>
         </div>
     </div>
@@ -260,6 +263,6 @@ if ($saveTable !== null) {
         </footer>
     </section>
 </body>
-<script src="../js/navbar.js"></script>
+<script src="../js/navbar.js?v=<?php echo file_exists(__DIR__ . '/../js/navbar.js') ? filemtime(__DIR__ . '/../js/navbar.js') : time(); ?>"></script>
 
 </html>
