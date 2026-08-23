@@ -25,12 +25,23 @@ if ($checkUser->fetch()) {
     exit('An account with that email already exists.');
 }
 
+$avatarOptions = [
+    'assets/avatars/avatar-1.svg',
+    'assets/avatars/avatar-2.svg',
+    'assets/avatars/avatar-3.svg',
+    'assets/avatars/avatar-4.svg',
+    'assets/avatars/avatar-5.svg',
+    'assets/avatars/avatar-6.svg',
+];
+$randomAvatar = $avatarOptions[array_rand($avatarOptions)];
+
 $createUser = $pdo->prepare(
-    'INSERT INTO users (email, password) VALUES (:email, :password)'
+    'INSERT INTO users (email, password, dp) VALUES (:email, :password, :dp)'
 );
 $createUser->execute([
     'email' => $email,
     'password' => password_hash($password, PASSWORD_DEFAULT),
+    'dp' => $randomAvatar,
 ]);
 
 header('Location: login.html?registered=1');

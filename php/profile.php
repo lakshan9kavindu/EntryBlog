@@ -7,7 +7,7 @@ require_once __DIR__ . '/auth.php';
 
 $userId = requireUser();
 
-$userQuery = $pdo->prepare('SELECT id, email FROM users WHERE id = :id LIMIT 1');
+$userQuery = $pdo->prepare('SELECT id, email, dp FROM users WHERE id = :id LIMIT 1');
 $userQuery->execute(['id' => $userId]);
 $user = $userQuery->fetch();
 
@@ -16,6 +16,7 @@ if (!$user) {
     exit;
 }
 
+$userDp = !empty($user['dp']) ? '../' . $user['dp'] : '../assets/sample-dp.png';
 $articleQuery = $pdo->prepare(
     'SELECT id, title, thumbnail, category, short_dec, article, date FROM articles WHERE userid = :userid ORDER BY date DESC'
 );
@@ -72,7 +73,7 @@ $articleCards = array_slice($articles, 0, 2);
 
     <section class="first-card">
         <div class="pro-card">
-            <img src="../assets/sample-dp.png" alt="Profile image">
+            <img src="<?php echo escapeOutput($userDp); ?>" alt="Profile image">
             <h3><?php echo $displayEmail; ?></h3>
             <p>Member account</p>
             <div class="button">
@@ -121,7 +122,7 @@ $articleCards = array_slice($articles, 0, 2);
                             <h3><?php echo escapeOutput($articleText); ?></h3>
                         </div>
                         <section class="article-profile">
-                            <div class="profile-dp"><img src="../assets/sample-dp.png" alt="Profile image"></div>
+                            <div class="profile-dp"><img src="<?php echo escapeOutput($userDp); ?>" alt="Profile image"></div>
                             <div class="author-name">
                                 <p><?php echo $displayEmail; ?></p>
                             </div>
