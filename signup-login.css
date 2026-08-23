@@ -590,7 +590,7 @@ footer .social img {
     }
 
     .navbar .user-profile {
-        order: 3;
+        display: none;
     }
 
     .navbar .search-bar,
