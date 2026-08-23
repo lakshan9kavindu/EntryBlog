@@ -23,6 +23,14 @@ $articleQuery->execute(['userid' => $userId]);
 $articles = $articleQuery->fetchAll();
 $displayEmail = escapeOutput((string) $user['email']);
 
+$followersQuery = $pdo->prepare('SELECT COUNT(*) FROM follows WHERE followid = :userid');
+$followersQuery->execute(['userid' => $userId]);
+$followersCount = (int) $followersQuery->fetchColumn();
+
+$followingQuery = $pdo->prepare('SELECT COUNT(*) FROM follows WHERE userid = :userid');
+$followingQuery->execute(['userid' => $userId]);
+$followingCount = (int) $followingQuery->fetchColumn();
+
 $articleCards = array_slice($articles, 0, 2);
 ?>
 <!DOCTYPE html>
@@ -69,8 +77,8 @@ $articleCards = array_slice($articles, 0, 2);
             <h3><?php echo $displayEmail; ?></h3>
             <p>Member account</p>
             <div class="button">
-                <a href="#"><img src="assets/icons/facebook.png" alt="followers"><p>Followers</p></a>
-                <a href="#"><img src="assets/icons/Instagram Circle.png" alt="followings"><p>Following</p></a>
+                <a href="#"><img src="assets/icons/facebook.png" alt="followers"><p><?php echo $followersCount; ?> Followers</p></a>
+                <a href="#"><img src="assets/icons/Instagram Circle.png" alt="followings"><p><?php echo $followingCount; ?> Following</p></a>
                 <a href="#"><img src="assets/icons/Medium.png" alt="articles"><p><?php echo count($articles); ?> Articles</p></a>
             </div>
             <div class="button-2">

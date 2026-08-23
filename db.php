@@ -27,6 +27,16 @@ try {
     if (!in_array('category', $articleColumns, true)) {
         $pdo->exec("ALTER TABLE articles ADD COLUMN category VARCHAR(100) NOT NULL DEFAULT 'Technology' AFTER thumbnail");
     }
+    $pdo->exec(
+        'CREATE TABLE IF NOT EXISTS saved_articles (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            userid INT UNSIGNED NOT NULL,
+            articleid INT UNSIGNED NOT NULL,
+            FOREIGN KEY (userid) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY (articleid) REFERENCES articles(id) ON DELETE CASCADE,
+            UNIQUE (userid, articleid)
+        )'
+    );
 } catch (PDOException $exception) {
     http_response_code(500);
     exit('Database connection failed. Import blog-system.sql and check your XAMPP MySQL settings.');

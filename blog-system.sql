@@ -56,3 +56,18 @@ CREATE TABLE follows (
     -- Prevent a user from following themselves
     CHECK (userid <> followid)
 );
+
+-- Saved Articles
+CREATE TABLE saved_articles (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    userid INT UNSIGNED NOT NULL,
+    articleid INT UNSIGNED NOT NULL,
+
+    FOREIGN KEY (userid) REFERENCES users(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (articleid) REFERENCES articles(id)
+        ON DELETE CASCADE,
+
+    -- Prevent the same user from saving an article twice
+    UNIQUE (userid, articleid)
+);
