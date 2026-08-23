@@ -186,13 +186,13 @@ if ($saveTable !== null) {
                 <h1><?php echo escapeOutput($title); ?></h1>
             </div>
             <div class="some-btn">
-                <div class="btn"><img src="../assets/icons/vector-6.png" alt="Category Icon">
+                <div class="btn"><img src="../assets/icons/Vector-6.png" alt="Category Icon">
                     <p><?php echo escapeOutput($category); ?></p>
                 </div>
-                <div class="btn"><img src="../assets/icons/vector-3.png" alt="Like Icon">
+                <div class="btn"><img src="../assets/icons/Vector-3.png" alt="Like Icon">
                     <p><?php echo $likeCount; ?> Likes</p>
                 </div>
-                <div class="btn"><img src="../assets/icons/scroll down.png" alt="Follow Icon">
+                <div class="btn"><img src="../assets/icons/Scroll Down.png" alt="Follow Icon">
                     <p><?php echo $followerCount; ?> Followers</p>
                 </div>
                 <div class="btn"><img src="../assets/icons/save-icon.png" alt="Bookmark Icon">
@@ -216,14 +216,14 @@ if ($saveTable !== null) {
             <form class="follow-btn" method="POST"><input type="hidden" name="csrf_token"
                     value="<?php echo escapeOutput(csrfToken()); ?>"><button type="submit" name="action"
                     value="follow"><?php echo $isFollowed ? 'Following' : 'Follow'; ?></button><img
-                    src="../assets/icons/scroll down.png" alt="Follow Icon"></form>
+                    src="../assets/icons/Scroll Down.png" alt="Follow Icon"></form>
             <form class="like-btn" method="POST"><input type="hidden" name="csrf_token"
                     value="<?php echo escapeOutput(csrfToken()); ?>"><button type="submit" name="action"
-                    value="like"><?php echo $isLiked ? 'Liked' : 'Like'; ?></button><img src="../assets/icons/vector.png"
+                    value="like"><?php echo $isLiked ? 'Liked' : 'Like'; ?></button><img src="../assets/icons/Vector.png"
                     alt="Like Icon"></form>
             <form class="save-btn" method="POST"><input type="hidden" name="csrf_token"
                     value="<?php echo escapeOutput(csrfToken()); ?>"><button type="submit" name="action" value="save"
-                    <?php echo $saveTable === null ? 'disabled' : ''; ?>><?php echo $isSaved ? 'Saved' : 'Save'; ?></button><img src="../assets/icons/save-icon.png"
+                    <?php echo $saveTable === null ? 'disabled' : ''; ?>><?php echo $isSaved ? 'Saved' : 'Save'; ?></button><img src="../assets/icons/Save-icon.png"
                     alt="Save Icon"></form>
         </div>
     </div>
