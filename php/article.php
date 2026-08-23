@@ -254,7 +254,7 @@ if ($saveTable !== null) {
                             <p>Login or Sign up</p><img src="../assets/icons/Down Button.png" alt="Login or sign up">
                         </a></div>
                     <div class="social">
-                        <p>Connect with us</p><img src="../assets/icons/facebook.png" alt="Facebook"><img
+                        <p>Connect with us</p><img src="../assets/icons/Facebook.png" alt="Facebook"><img
                             src="../assets/icons/Instagram Circle.png" alt="Instagram"><img src="../assets/icons/Medium.png"
                             alt="Medium">
                     </div>

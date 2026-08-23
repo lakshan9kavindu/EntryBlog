@@ -100,7 +100,7 @@ function renderArticleCard(?array $article, string $class): void
                 <div class="main-header">
                     <div class="social-icon">
                         <div class="line"></div>
-                        <div class="social-links"><a href="#"><img src="../assets/icons/facebook.png" alt="Facebook"></a><a
+                        <div class="social-links"><a href="#"><img src="../assets/icons/Facebook.png" alt="Facebook"></a><a
                                 href="#"><img src="../assets/icons/Instagram Circle.png" alt="Instagram"></a><a
                                 href="#"><img src="../assets/icons/Medium.png" alt="Medium"></a></div>
                     </div>
@@ -256,7 +256,7 @@ function renderArticleCard(?array $article, string $class): void
                         </a>
                     </div>
                     <div class="social">
-                        <p>Connect with us</p><img src="../assets/icons/facebook.png" alt="Facebook"><img
+                        <p>Connect with us</p><img src="../assets/icons/Facebook.png" alt="Facebook"><img
                             src="../assets/icons/Instagram Circle.png" alt="Instagram"><img src="../assets/icons/Medium.png"
                             alt="Medium">
                     </div>
