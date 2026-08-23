@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: sans-serif;
     margin: 0;
@@ -169,6 +173,16 @@ header button
     font-weight: bold;
     border-radius: 50px;
     margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.text-vector .header-button .e-more:hover,
+.s-down:hover,
+.middile-bar .button a:hover {
+    opacity: 0.92;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(253, 198, 62, 0.35);
 }
 
 .e-more p,
@@ -186,7 +200,11 @@ header button
 }
 
 .s-down {
-    background-color: #F7F5F4
+    background-color: #F7F5F4;
+}
+
+.s-down:hover {
+    box-shadow: 0 4px 12px rgba(247, 245, 244, 0.35);
 }
 
 .s-down img {
@@ -401,6 +419,21 @@ number line
     color: #F7F5F4;
     font-weight: bold;
     font-size: 20px;
+    user-select: none;
+}
+
+.number-line-main p,
+.number-line-main .num-item {
+    cursor: pointer;
+    margin: 6px 0;
+    transition: color 0.2s, font-size 0.2s, transform 0.2s;
+    text-align: center;
+}
+
+.number-line-main p:hover,
+.number-line-main .num-item:hover {
+    color: #FDC63E;
+    transform: scale(1.15);
 }
 
 .number-line-main .number-line {
@@ -412,7 +445,8 @@ number line
     margin-right: auto;
 }
 
-.number-line-main .active {
+.number-line-main .active,
+.number-line-main .num-item.active {
     color: #FDC63E;
     font-size: 30px;
 }

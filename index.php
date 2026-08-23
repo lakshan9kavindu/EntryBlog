@@ -17,6 +17,19 @@ $categories = $pdo->query(
 )->fetchAll();
 
 $articleCards = $articles ?: [null];
+$latestHeaderArticles = [];
+for ($i = 0; $i < 4; $i++) {
+    $art = $articles[$i] ?? null;
+    $latestHeaderArticles[] = [
+        'id' => $art ? (int) $art['id'] : 0,
+        'title' => articleValue($art, 'title', 'No articles published yet'),
+        'description' => articleValue($art, 'short_dec', 'Create an article to see it here.'),
+        'category' => articleValue($art, 'category', 'Technology'),
+        'author' => articleValue($art, 'email', 'EntryBlog'),
+        'date' => articleValue($art, 'date', ''),
+        'thumbnail' => articleThumbnail($art),
+    ];
+}
 function articleValue(?array $article, string $key, string $fallback): string
 {
     $value = trim((string) ($article[$key] ?? ''));
@@ -68,6 +81,7 @@ function renderArticleCard(?array $article, string $class): void
                         <ul>
                             <li class="active"><a href="index.php">Home</a></li>
                             <li><a href="#categories">Categories</a></li>
+                            <li><a href="#latest-articles">Latest Articles</a></li>
                             <li><a href="#about">About us</a></li>
                             <li><a href="#contact">Contact</a></li>
                         </ul>
@@ -88,21 +102,21 @@ function renderArticleCard(?array $article, string $class): void
                     </div>
                     <div class="text-vector"><img src="assets/texts/header h1.png" alt="EntryBlog">
                         <div class="header-button">
-                            <div class="e-more">
+                            <a class="e-more" href="all-articles.php">
                                 <p>Explore more...</p><img src="assets/icons/Down Button.png" alt="Explore more">
-                            </div>
-                            <div class="s-down">
+                            </a>
+                            <a class="s-down" href="#latest-articles">
                                 <p>Scroll Down...</p><img src="assets/icons/Down Button.png" alt="Scroll down">
-                            </div>
+                            </a>
                         </div>
                     </div>
                     <?php renderArticleCard($articleCards[0], 'hot-article'); ?>
                     <div class="number-line-main">
-                        <p class="active">1</p>
+                        <p class="num-item active" data-index="0">1</p>
                         <div class="number-line"></div>
-                        <p>2</p>
-                        <p>3</p>
-                        <p>4</p>
+                        <p class="num-item" data-index="1">2</p>
+                        <p class="num-item" data-index="2">3</p>
+                        <p class="num-item" data-index="3">4</p>
                     </div>
                 </div>
             </section>
@@ -163,7 +177,7 @@ function renderArticleCard(?array $article, string $class): void
                 </a></div>
         </div>
     </section>
-    <section>
+    <section id="latest-articles">
         <div class="second-article">
             <div class="top">
                 <div class="title">
@@ -246,6 +260,62 @@ function renderArticleCard(?array $article, string $class): void
             </div>
         </footer>
     </section>
+    <script id="header-articles-data" type="application/json">
+        <?php echo json_encode($latestHeaderArticles, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dataEl = document.getElementById('header-articles-data');
+            if (!dataEl) return;
+            let headerArticles = [];
+            try {
+                headerArticles = JSON.parse(dataEl.textContent);
+            } catch (e) {
+                return;
+            }
+
+            const numberItems = document.querySelectorAll('.number-line-main .num-item');
+            const hotCard = document.querySelector('.hot-article');
+            if (!hotCard || !numberItems.length) return;
+
+            const imgEl = hotCard.querySelector('.post-image img');
+            const categoryEl = hotCard.querySelector('.category p');
+            const titleEl = hotCard.querySelector('.topic h2');
+            const descEl = hotCard.querySelector('.short-description h3');
+            const authorEl = hotCard.querySelector('.author-name p');
+            const dateEl = hotCard.querySelector('.publish-date p');
+
+            function selectHeaderArticle(index) {
+                const article = headerArticles[index];
+                if (!article) return;
+
+                numberItems.forEach((item, idx) => {
+                    item.classList.toggle('active', idx === index);
+                });
+
+                if (imgEl && article.thumbnail) imgEl.src = article.thumbnail;
+                if (categoryEl && article.category) categoryEl.textContent = article.category;
+                if (titleEl && article.title) titleEl.textContent = article.title;
+                if (descEl && article.description) descEl.textContent = article.description;
+                if (authorEl && article.author) authorEl.textContent = article.author;
+                if (dateEl) dateEl.textContent = article.date || '';
+
+                if (article.id > 0) {
+                    hotCard.onclick = () => { window.location.href = `article.php?id=${article.id}`; };
+                    hotCard.style.cursor = 'pointer';
+                } else {
+                    hotCard.onclick = null;
+                    hotCard.style.cursor = 'default';
+                }
+            }
+
+            numberItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    selectHeaderArticle(index);
+                });
+            });
+        });
+    </script>
 </body>
 <script src="navbar.js"></script>
 
