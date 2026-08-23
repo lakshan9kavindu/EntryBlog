@@ -763,11 +763,15 @@ img {
     }
 
     .first-card .pro-card {
-        width: min(100%, 420px);
+        width: auto;
         height: auto;
         min-height: 0;
         margin: 35px auto 0;
         padding: 24px 16px;
+    }
+
+    .pro-card .button a{
+        width: auto !important;
     }
 
     .pro-card h3 {
@@ -791,6 +795,10 @@ img {
         width: 100%;
     }
 
+    .footer-1{
+        margin-top:0;
+    }
+
     footer .component {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -808,6 +816,10 @@ img {
 
     footer .page {
         margin-left: 0;
+    }
+
+    footer p{
+        width: 100%;
     }
 
     footer .page ul {
