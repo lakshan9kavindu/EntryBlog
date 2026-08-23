@@ -264,7 +264,7 @@ function allArticleAuthorDp(array $article): string
                         </a>
                     </div>
                     <div class="social">
-                        <p>Connect with us</p><img src="../assets/icons/facebook.png" alt="Facebook"><img
+                        <p>Connect with us</p><img src="../assets/icons/Facebook.png" alt="Facebook"><img
                             src="../assets/icons/Instagram Circle.png" alt="Instagram"><img
                             src="../assets/icons/Medium.png" alt="Medium">
                     </div>
