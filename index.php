@@ -62,7 +62,8 @@ function renderArticleCard(?array $article, string $class): void
             <section class="navigation">
                 <div class="navbar">
                     <div class="logo"><a href="index.php"><img src="assets/logo/logo.png" alt="Logo"></a></div>
-                    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img src="assets/icons/profile-icon.png" alt="Menu"></button>
+                    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img
+                            src="assets/icons/profile-icon.png" alt="Menu"></button>
                     <div class="nav-links">
                         <ul>
                             <li class="active"><a href="index.php">Home</a></li>
@@ -73,8 +74,8 @@ function renderArticleCard(?array $article, string $class): void
                     </div>
                     <div class="search-bar"><input type="text" placeholder="Search..."><img
                             src="assets/icons/Search-white.png" alt="Search Icon"></div>
-                    <div class="user-profile" data-hide-when-authenticated="true"><a href="login.html"><img src="assets/icons/login-black.png"
-                                alt="Login"></a></div>
+                    <div class="user-profile" data-hide-when-authenticated="true"><a href="login.html"><img
+                                src="assets/icons/login-black.png" alt="Login"></a></div>
                 </div>
             </section>
             <section>
@@ -114,7 +115,9 @@ function renderArticleCard(?array $article, string $class): void
                 <h2>Categories</h2>
                 <div class="category-list">
                     <?php foreach (array_slice($categories, 0, 4) as $category): ?>
-                        <a class="category-item" href="all-articles.php?category=<?php echo urlencode((string) $category['category']); ?>"><img src="assets/icons/Variant3-1.png"
+                        <a class="category-item"
+                            href="all-articles.php?category=<?php echo urlencode((string) $category['category']); ?>"><img
+                                src="assets/icons/Variant3-1.png"
                                 alt="<?php echo escapeOutput((string) $category['category']); ?>">
                             <h2><?php echo escapeOutput((string) $category['category']); ?></h2>
                             <p><?php echo (int) $category['article_count']; ?> articles</p>
@@ -134,12 +137,13 @@ function renderArticleCard(?array $article, string $class): void
                 <div class="top-layer">
                     <h1>Editors' Picks</h1>
                     <div class="top-img">
-                        <img
-                            src="assets/icons/Down Button.png" alt="Previous"></div>
+                        <img src="assets/icons/Down Button.png" alt="Previous">
+                    </div>
                 </div>
                 <div class="articles">
                     <?php foreach (array_slice($articleCards, 0, 3) as $article):
-                        renderArticleCard($article, 'editors-article'); endforeach; ?>
+                        renderArticleCard($article, 'editors-article');
+                    endforeach; ?>
                 </div>
             </div>
         </div>

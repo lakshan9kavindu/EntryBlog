@@ -150,7 +150,8 @@ function allArticleThumbnail(array $article): string
             <section class="navigation">
                 <div class="navbar">
                     <div class="logo"><a href="index.php"><img src="assets/logo/logo.png" alt="Logo"></a></div>
-                    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img src="assets/icons/profile-icon.png" alt="Menu"></button>
+                    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img
+                            src="assets/icons/profile-icon.png" alt="Menu"></button>
                     <div class="nav-links">
                         <ul>
                             <li><a href="index.php">Home</a></li>
@@ -161,8 +162,8 @@ function allArticleThumbnail(array $article): string
                     </div>
                     <div class="search-bar"><input type="text" placeholder="Search..."><img
                             src="assets/icons/Search-white.png" alt="Search Icon"></div>
-                    <div class="user-profile" data-hide-when-authenticated="true"><a href="login.html"><img src="assets/icons/login-black.png"
-                                alt="Login"></a></div>
+                    <div class="user-profile" data-hide-when-authenticated="true"><a href="login.html"><img
+                                src="assets/icons/login-black.png" alt="Login"></a></div>
                 </div>
             </section>
         </div>

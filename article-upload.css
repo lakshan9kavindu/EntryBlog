@@ -1,4 +1,4 @@
-body{
+body {
     font-family: sans-serif;
     margin: 0;
 }
@@ -7,12 +7,12 @@ body{
 header
 */
 
-header{
+header {
     background-color: #040506;
 }
 
-.full-header{
-    background-color:#040506;
+.full-header {
+    background-color: #040506;
     margin-left: auto;
     margin-right: auto;
 }
@@ -21,7 +21,7 @@ header{
 navigationbar
 */
 
-.navigation{
+.navigation {
     display: flex;
     width: min(calc(100% - 40px), 1300px);
     padding-top: 30px;
@@ -29,7 +29,7 @@ navigationbar
     margin-right: auto;
 }
 
-.navbar{
+.navbar {
     display: inline-flex;
     margin-left: auto;
     margin-right: auto;
@@ -37,31 +37,31 @@ navigationbar
     gap: 30px;
 }
 
-.nav-links{
+.nav-links {
     margin-left: auto;
     margin-right: 30px;
 }
 
-.nav-links ul{
+.nav-links ul {
     list-style: none;
     display: inline-flex;
     gap: 70px;
 }
 
-.nav-links .active{
+.nav-links .active {
     font-size: larger;
-    font-weight:bolder;
+    font-weight: bolder;
     text-decoration: underline #F7F5F4;
 }
 
-.nav-links ul li a{
+.nav-links ul li a {
     color: #F7F5F4;
     text-decoration: none;
 }
 
-.search-bar{
+.search-bar {
     margin-right: auto;
-        margin: auto;
+    margin: auto;
 
     margin-left: 50px;
     display: inline-flex;
@@ -73,22 +73,22 @@ navigationbar
     height: 15px;
 }
 
-.search-bar img{
+.search-bar img {
     width: 30px;
     height: 30px;
     margin-top: -6px;
     margin-bottom: auto
 }
 
-.search-bar input[type=text]{
+.search-bar input[type=text] {
     height: 15px;
     border-radius: 50px;
     background-color: #040506;
     border: none;
 }
 
-.user-profile img{
-    margin:auto;
+.user-profile img {
+    margin: auto;
     width: auto;
     height: 45px;
 }
@@ -230,11 +230,11 @@ body {
 }
 
 .intro-arrow {
-    width: 42px;
-    height: 42px;
+    margin-left: auto;
+    width: 30px;
+    height: 30px;
     color: #f7f5f4;
     background: #3e3e3e;
-    font-size: 34px;
     line-height: 1;
 }
 
@@ -308,8 +308,8 @@ body {
 }
 
 .upload-message.error {
-    color:#fdc63e;
-    background:#888;
+    color: #fdc63e;
+    background: #888;
 }
 
 .thumbnail-preview {
@@ -328,7 +328,6 @@ body {
     display: flex;
     align-items: center;
     gap: 16px;
-    margin: 22px 0 45px auto;
     padding: 10px 12px 10px 20px;
     border: 0;
     border-radius: 24px;
@@ -356,6 +355,7 @@ body {
     align-items: center;
     justify-content: flex-end;
     gap: 14px;
+    margin-top: 22px;
 }
 
 .upload-actions .submit-article {
@@ -451,6 +451,7 @@ img {
 }
 
 @media (max-width: 1180px) {
+
     .navigation,
     .upload-page {
         width: min(calc(100% - 40px), 1040px);
@@ -458,6 +459,7 @@ img {
 }
 
 @media (max-width: 900px) {
+
     .navigation,
     .upload-page {
         width: min(calc(100% - 36px), 700px);
@@ -498,6 +500,7 @@ img {
 }
 
 @media (max-width: 560px) {
+
     .navigation,
     .upload-page {
         width: min(calc(100% - 28px), 620px);

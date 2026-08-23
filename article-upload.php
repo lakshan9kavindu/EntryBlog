@@ -180,8 +180,9 @@ $currentThumbnail = (string) ($editArticle['thumbnail'] ?? '');
                 <textarea name="article" placeholder="type here..." aria-label="Article content" required><?php echo escapeOutput($formArticle); ?></textarea>
             </section>
             <div class="upload-actions">
+                                <button class="delete-article" type="submit" name="action" value="delete" formnovalidate>Delete article</button>
+
                 <button class="submit-article" type="submit" name="action" value="save"><?php echo $editArticle ? 'Update article' : 'Submit article'; ?> <span>&#8250;</span></button>
-                <button class="delete-article" type="submit" name="action" value="delete" formnovalidate>Delete article</button>
             </div>
         </form>
     </main>

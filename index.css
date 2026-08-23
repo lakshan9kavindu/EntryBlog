@@ -1,4 +1,4 @@
-body{
+body {
     font-family: sans-serif;
     margin: 0;
 }
@@ -7,12 +7,12 @@ body{
 header
 */
 
-header{
+header {
     background-color: #040506;
 }
 
-.full-header{
-    background-color:#040506;
+.full-header {
+    background-color: #040506;
     width: 100%;
     height: 700px;
     margin-left: auto;
@@ -23,7 +23,7 @@ header{
 navigationbar
 */
 
-.navigation{
+.navigation {
     display: flex;
     width: min(calc(100% - 40px), 1180px);
     margin-left: auto;
@@ -31,7 +31,7 @@ navigationbar
     padding-top: 30px;
 }
 
-.navbar{
+.navbar {
     display: inline-flex;
     margin-left: auto;
     margin-right: auto;
@@ -39,31 +39,31 @@ navigationbar
     gap: 30px;
 }
 
-.nav-links{
+.nav-links {
     margin-left: auto;
     margin-right: 30px;
 }
 
-.nav-links ul{
+.nav-links ul {
     list-style: none;
     display: inline-flex;
     gap: 70px;
 }
 
-.nav-links .active{
+.nav-links .active {
     font-size: larger;
-    font-weight:bolder;
+    font-weight: bolder;
     text-decoration: underline #F7F5F4;
 }
 
-.nav-links ul li a{
+.nav-links ul li a {
     color: #F7F5F4;
     text-decoration: none;
 }
 
-.search-bar{
+.search-bar {
     margin-right: auto;
-        margin: auto;
+    margin: auto;
 
     margin-left: 50px;
     display: inline-flex;
@@ -75,22 +75,22 @@ navigationbar
     height: 15px;
 }
 
-.search-bar img{
+.search-bar img {
     width: 30px;
     height: 30px;
     margin-top: -6px;
     margin-bottom: auto
 }
 
-.search-bar input[type=text]{
+.search-bar input[type=text] {
     height: 15px;
     border-radius: 50px;
     background-color: #040506;
     border: none;
 }
 
-.user-profile img{
-    margin:auto;
+.user-profile img {
+    margin: auto;
     width: auto;
     height: 45px;
 }
@@ -100,7 +100,7 @@ navigationbar
 main header
 */
 
-.main-header{
+.main-header {
     display: flex;
     width: min(calc(100% - 40px), 1180px);
     margin-top: 50px;
@@ -108,7 +108,7 @@ main header
     margin-right: auto;
 }
 
-.line{
+.line {
     padding: 1px;
     margin-right: auto;
     margin-left: auto;
@@ -118,27 +118,27 @@ main header
     margin-bottom: 5px;
 }
 
-.social-links{
+.social-links {
     width: 30px;
 }
 
-.social-links img{
+.social-links img {
     width: 30px;
     height: 30px;
-    margin-top: 10px;   
+    margin-top: 10px;
 }
 
 /*
 main header h1
 */
 
-.main-header .text-vector{
+.main-header .text-vector {
     margin-right: auto;
     margin-left: auto;
     margin-top: 100px;
 }
 
-.main-header .text-vector img{
+.main-header .text-vector img {
     width: 400px;
     height: 200px;
 }
@@ -147,14 +147,16 @@ main header h1
 header button
 */
 
-.text-vector .header-button{
+.text-vector .header-button {
     margin-top: 20px;
     width: 200px;
     height: 50px;
     margin-left: 55px;
 }
 
-.text-vector .header-button .e-more , .s-down, .middile-bar .button a{
+.text-vector .header-button .e-more,
+.s-down,
+.middile-bar .button a {
     display: inline-flex;
     align-items: center;
     color: #040506;
@@ -169,23 +171,25 @@ header button
     margin-bottom: 20px;
 }
 
-.e-more p, .s-down p{
+.e-more p,
+.s-down p {
     margin-left: 20px;
     margin-right: auto;
 }
 
-.text-vector .header-button img , .s-down img{
+.text-vector .header-button img,
+.s-down img {
     margin-left: auto;
     width: 33px;
     height: 33px;
     margin: 1px;
 }
 
-.s-down{
-    background-color:#F7F5F4
+.s-down {
+    background-color: #F7F5F4
 }
 
-.s-down img{
+.s-down img {
     transform: rotate(90deg);
 }
 
@@ -193,15 +197,19 @@ header button
 hot article
 */
 /* 1. Main Card Container */
-.hot-article , .editors-article {
+.hot-article,
+.editors-article {
     position: relative;
     width: 400px;
     height: 500px;
-    border-radius: 40px; /* image's softer curve */
-    overflow: clip; /* Keeps the image inside the rounded corners */
+    border-radius: 40px;
+    /* image's softer curve */
+    overflow: clip;
+    /* Keeps the image inside the rounded corners */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Pushes content to the bottom */
+    justify-content: flex-end;
+    /* Pushes content to the bottom */
     padding: 24px;
     box-sizing: border-box;
     color: #F7F5F4;
@@ -209,7 +217,8 @@ hot article
 }
 
 /* 2. Background Image Positioning */
-.hot-article .post-image , .editors-article .post-image{
+.hot-article .post-image,
+.editors-article .post-image {
     position: absolute;
     top: 0;
     left: 0;
@@ -218,14 +227,17 @@ hot article
     z-index: 0;
 }
 
-.hot-article .post-image img, .editors-article .post-image img {
+.hot-article .post-image img,
+.editors-article .post-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image fills the card without stretching */
+    object-fit: cover;
+    /* Ensures the image fills the card without stretching */
 }
 
 /* 3. Gradient Overlay (The Crop Mask effect) */
-.hot-article::before, .editors-article::before {
+.hot-article::before,
+.editors-article::before {
     content: "";
     position: absolute;
     top: 0;
@@ -238,16 +250,17 @@ hot article
 }
 
 /* Ensure all text/UI elements sit ABOVE the image and gradient */
-.hot-article > div,
-.hot-article > section,
-.editors-article > div,
-.editors-article > section {
+.hot-article>div,
+.hot-article>section,
+.editors-article>div,
+.editors-article>section {
     position: relative;
     z-index: 2;
 }
 
 /* 4. "Latest" Label (Top Left) */
-.hot-article .lable, .editors-article .lable {
+.hot-article .lable,
+.editors-article .lable {
     position: absolute;
     top: 24px;
     left: 24px;
@@ -264,11 +277,13 @@ hot article
     border-radius: 20px;
 }
 
-.hot-article .lable p, .editors-article .lable p {
+.hot-article .lable p,
+.editors-article .lable p {
     margin: 0;
 }
 
-.hot-article .dot, .editors-article .dot {
+.hot-article .dot,
+.editors-article .dot {
     width: 10px;
     height: 10px;
     border-radius: 100%;
@@ -276,20 +291,23 @@ hot article
 }
 
 /* 5. Typography (Title & Description) */
-.hot-article .category p, .editors-article .category p {
+.hot-article .category p,
+.editors-article .category p {
     color: #FDC63E;
     font-weight: bold;
     margin: 0 0 8px 0;
     font-size: 14px;
 }
 
-.hot-article .topic h2, .editors-article .topic h2 {
+.hot-article .topic h2,
+.editors-article .topic h2 {
     margin: 0 0 12px 0;
     font-size: 22px;
     line-height: 1.3;
 }
 
-.hot-article .short-description h3, .editors-article .short-description h3 {
+.hot-article .short-description h3,
+.editors-article .short-description h3 {
     margin: 0 0 24px 0;
     font-size: 15px;
     font-weight: normal;
@@ -298,7 +316,8 @@ hot article
 }
 
 /* 6. Profile Section (Using CSS Grid to match the layout without changing HTML) */
-.article-profile , .editors-article .article-profile {
+.article-profile,
+.editors-article .article-profile {
     display: grid;
     grid-template-columns: auto auto 1fr auto;
     grid-template-rows: auto auto;
@@ -314,13 +333,15 @@ hot article
 }
 
 /* Place the avatar on the left, spanning both rows */
-.article-profile .profile-dp, .editors-article .profile-dp {
+.article-profile .profile-dp,
+.editors-article .profile-dp {
     grid-column: 1 / 2;
     grid-row: 1 / 3;
     margin-right: 12px;
 }
 
-.article-profile .profile-dp img , .editors-article .profile-dp img {
+.article-profile .profile-dp img,
+.editors-article .profile-dp img {
     width: 44px;
     height: 44px;
     border-radius: 100%;
@@ -328,7 +349,8 @@ hot article
 }
 
 /* Name on the top row */
-.article-profile .author-name, .editors-article .author-name {
+.article-profile .author-name,
+.editors-article .author-name {
     grid-column: 2 / 4;
     grid-row: 1 / 2;
     font-weight: bold;
@@ -336,7 +358,8 @@ hot article
 }
 
 /* Date on the bottom row, left */
-.article-profile .publish-date, .editors-article .publish-date   {
+.article-profile .publish-date,
+.editors-article .publish-date {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     font-size: 13px;
@@ -344,7 +367,8 @@ hot article
 }
 
 /* Reading time on the bottom row, right */
-.article-profile .reading-time, .editors-article .reading-time {
+.article-profile .reading-time,
+.editors-article .reading-time {
     grid-column: 3 / 4;
     grid-row: 2 / 3;
     font-size: 13px;
@@ -352,7 +376,8 @@ hot article
 }
 
 /* Download/Down icon pushed all the way to the right */
-.article-profile .down-icon, .editors-article .down-icon {
+.article-profile .down-icon,
+.editors-article .down-icon {
     grid-column: 4 / 5;
     grid-row: 1 / 3;
     justify-self: end;
@@ -365,11 +390,12 @@ hot article
     padding: 6px;
     box-sizing: border-box;
 }
+
 /*
 number line
 */
 
-.number-line-main{
+.number-line-main {
     margin-top: 100px;
     margin-left: 40px;
     color: #F7F5F4;
@@ -377,7 +403,7 @@ number line
     font-size: 20px;
 }
 
-.number-line-main .number-line{
+.number-line-main .number-line {
     height: 80px;
     width: 1px;
     padding: 1px;
@@ -386,7 +412,7 @@ number line
     margin-right: auto;
 }
 
-.number-line-main .active{
+.number-line-main .active {
     color: #FDC63E;
     font-size: 30px;
 }
@@ -395,7 +421,7 @@ number line
 section-2
 */
 
-.section-2{
+.section-2 {
     width: 1300px;
     height: 500px;
     margin-left: auto;
@@ -404,37 +430,37 @@ section-2
     display: flex;
 }
 
-.category-list{
+.category-list {
     width: 300px;
     height: auto;
     padding: 10px;
 }
 
-.category-item{
+.category-item {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
     gap: 10px;
 }
 
-.category-item h2{
+.category-item h2 {
     width: 200px;
     font-size: 20px;
     text-align: center;
 }
 
-.category-item p{
+.category-item p {
     width: 100px;
     font-size: 15px;
     text-align: center;
 }
 
-.category-item img{
+.category-item img {
     width: 20px;
     height: 20px;
 }
 
-.view-all-btn{
+.view-all-btn {
     display: inline-flex;
     align-items: center;
     height: 42px;
@@ -447,12 +473,12 @@ section-2
     margin-bottom: 20px;
 }
 
-.view-all-btn p{
+.view-all-btn p {
     margin-left: 20px;
     margin-right: auto;
 }
 
-.view-all-btn img{
+.view-all-btn img {
     margin-left: auto;
     width: 33px;
     height: 33px;
@@ -463,7 +489,7 @@ section-2
 section-2 line
 */
 
-.category .line{
+.category .line {
     padding: 1px;
     margin-right: 50px;
     margin-left: 50px;
@@ -475,66 +501,67 @@ section-2 line
     margin-bottom: auto;
 }
 
-.article-cards .top-layer{
+.article-cards .top-layer {
     display: flex;
 }
 
-.article-cards .top-layer .h1{
+.article-cards .top-layer .h1 {
     margin-left: 20px;
     margin-right: 0;
 }
 
-.article-cards .top-layer .top-img{
+.article-cards .top-layer .top-img {
     margin-left: auto;
     margin-right: 20px;
     display: flex;
     gap: 10px;
 }
 
-.article-cards .top-layer img{
+.article-cards .top-layer img {
     width: 40px;
     height: 40px;
     margin-top: 10px;
 }
 
-.articles{
+.articles {
     display: flex;
     gap: 20px;
 }
 
-.editors-article{
+.editors-article {
     width: 300px;
     height: 400px;
 }
 
-.editors-article .lable{
+.editors-article .lable {
     top: 20px;
     left: 20px;
     font-size: 10px;
 }
 
-.editors-article .category p{
+.editors-article .category p {
     font-size: 12px;
 }
 
-.editors-article .topic h2{
+.editors-article .topic h2 {
     font-size: 18px;
 }
 
-.editors-article .short-description h3{
+.editors-article .short-description h3 {
     font-size: 13px;
 }
 
-.editors-article .article-profile .profile-dp img{
+.editors-article .article-profile .profile-dp img {
     width: 35px;
     height: 35px;
 }
 
-.editors-article .article-profile .author-name{
+.editors-article .article-profile .author-name {
     font-size: 13px;
 }
 
-.editors-article .article-profile .publish-date, .editors-article .article-profile .reading-time{
+.editors-article .article-profile .publish-date,
+.editors-article .article-profile .reading-time {
     font-size: 11px;
 }
 
@@ -542,7 +569,7 @@ section-2 line
 middle bar
 */
 
-.middile-bar{
+.middile-bar {
     width: 1300px;
     height: 100px;
     margin-left: auto;
@@ -556,49 +583,50 @@ middle bar
     padding: 10px;
 }
 
-.middile-bar .profile-icon{
+.middile-bar .profile-icon {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 40px;
 }
 
-.middile-bar .profile-icon img{
+.middile-bar .profile-icon img {
     width: 70px;
     height: 70px;
     border-radius: 100%;
 }
 
-.middile-bar .main-text{
+.middile-bar .main-text {
     margin-left: 20px;
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
 }
 
-.middile-bar .main-text p, .middile-bar .main-text h1{
+.middile-bar .main-text p,
+.middile-bar .main-text h1 {
     margin: 10px;
 }
 
-.middile-bar .second-text{
+.middile-bar .second-text {
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 50px;
 }
 
-.middile-bar .button{
+.middile-bar .button {
     width: 220px;
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 40px;
 }
 
-.middile-bar .button p{
+.middile-bar .button p {
     margin-left: 20px;
     margin-right: auto;
     font-size: medium;
 }
 
-.middile-bar .button img{
+.middile-bar .button img {
     width: 30px;
     height: 30px;
 }
@@ -607,7 +635,7 @@ middle bar
 second article container
 */
 
-.second-article{
+.second-article {
     width: 1300px;
     height: auto;
     margin-top: 50px;
@@ -615,15 +643,15 @@ second article container
     margin-right: auto;
 }
 
-.second-article .top{
+.second-article .top {
     display: flex;
 }
 
-.second-article .top .title{
+.second-article .top .title {
     display: flex;
 }
 
-.second-article .top .btn{
+.second-article .top .btn {
     display: inline-flex;
     align-items: center;
     color: #040506;
@@ -631,7 +659,7 @@ second article container
     height: 42px;
     width: 120px;
     text-decoration: none;
-    background-color:#d1d1d1;
+    background-color: #d1d1d1;
     font-size: 20px;
     font-weight: bold;
     border-radius: 50px;
@@ -640,19 +668,19 @@ second article container
     margin-left: auto;
 }
 
-.second-article .top .btn p{
+.second-article .top .btn p {
     margin-left: 10px;
     margin-right: auto;
 }
 
-.second-article .top .btn img{
+.second-article .top .btn img {
     margin-left: auto;
     width: 33px;
     height: 33px;
 }
 
 
-.item-container{
+.item-container {
     display: flex;
     row-gap: auto;
 }
@@ -664,21 +692,21 @@ second article card
 /* --- Main Card Container --- */
 .article-item {
     display: flex;
-    background-color: #F8F8F8; 
+    background-color: #F8F8F8;
     border-radius: 24px;
     padding: 16px;
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); 
-    gap: 24px; 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    gap: 24px;
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 /* --- Image Section --- */
 .article-item .article-image {
-    flex: 0 0 150px; 
+    flex: 0 0 150px;
     border-radius: 16px;
     overflow: hidden;
 }
@@ -698,7 +726,7 @@ second article card
 
 /* Category */
 .article-item .category p {
-    color: #F2B83A; 
+    color: #F2B83A;
     font-weight: 700;
     font-size: 14px;
     margin: 0 0 12px 0;
@@ -722,7 +750,7 @@ second article card
 }
 
 .article-item .article-profile {
-    display:flex;
+    display: flex;
 }
 
 .article-item .profile-dp img {
@@ -746,7 +774,7 @@ second article card
     margin: 0;
 }
 
-.article-item .author-name h3{
+.article-item .author-name h3 {
     font-size: 12px;
     margin: 0;
 }
@@ -762,7 +790,7 @@ second article card
 footer
 */
 
-.footer-1{
+.footer-1 {
     display: flex;
     background-color: #040506;
     border-radius: 100px 100px 0px 0px;
@@ -770,7 +798,7 @@ footer
 
 }
 
-footer{
+footer {
     height: 300px;
     color: #F7F5F4;
     display: flex;
@@ -780,7 +808,7 @@ footer{
 
 
 
-footer .component{
+footer .component {
     padding-top: 30px;
     padding-left: 40px;
     padding-right: 40px;
@@ -792,55 +820,55 @@ footer .component{
     gap: 20px;
 }
 
-footer .first{
+footer .first {
     width: 400px;
 }
 
-footer .text-1{
+footer .text-1 {
     margin-top: 30px;
 }
 
-footer .text-1 .bold{
+footer .text-1 .bold {
     font-weight: bolder;
     font-size: large;
 }
 
-footer .copiright p{
+footer .copiright p {
     margin-top: 70px;
 }
 
-footer .social{
+footer .social {
     margin-top: 50px;
 }
 
-footer .second{
+footer .second {
     width: 500px;
 }
 
-footer .second img{
+footer .second img {
     position: relative;
     top: 70px;
     width: 400px;
 }
 
-footer .page{
+footer .page {
     margin-left: -230px;
     position: relative;
     display: flex;
     gap: 50px;
 }
 
-footer .page li{
+footer .page li {
     display: inline;
     list-style: none;
 }
 
-footer .page ul{
+footer .page ul {
     display: flex;
     gap: 50px;
 }
 
-footer .page li a{
+footer .page li a {
     text-decoration: none;
     color: #F7F5F4;
     font-size: 20px;
@@ -848,14 +876,14 @@ footer .page li a{
     margin-right: 20px;
 }
 
-footer .button img{
+footer .button img {
     margin-top: auto;
     margin-bottom: auto;
     width: 40px;
     height: 40px;
 }
 
-footer .button .b-1 img{
+footer .button .b-1 img {
     transform: rotate(-90deg)
 }
 
@@ -865,7 +893,7 @@ footer .button {
     margin-top: 30px;
 }
 
-footer .button p{
+footer .button p {
     margin-left: 20px;
     margin-right: auto;
     font-size: 15px;
@@ -875,7 +903,8 @@ footer .button p{
     padding: 0;
 }
 
-footer .button .b-1, footer .button .b-2{
+footer .button .b-1,
+footer .button .b-2 {
     background-color: #FDC63E;
     height: 40px;
     border-radius: 50px;
@@ -885,34 +914,34 @@ footer .button .b-1, footer .button .b-2{
 
 }
 
-footer .button .b-1{
+footer .button .b-1 {
     background-color: #F7F5F4;
 }
 
-footer .social{
+footer .social {
     display: flex;
     margin-left: -50px;
     position: relative;
 }
 
-footer .social p{
+footer .social p {
     margin-right: 80px;
     font-size: 15px;
     font-weight: bolder;
 }
 
-footer .social img{
+footer .social img {
     width: 50px;
     height: 50px;
     margin-right: 20px;
 }
 
-.category-item{
+.category-item {
     text-decoration: none;
 }
 
 .view-all-btn,
-.second-article .top .btn{
+.second-article .top .btn {
     text-decoration: none;
 }
 
@@ -949,6 +978,7 @@ img {
 }
 
 @media (max-width: 1180px) {
+
     .full-header,
     .section-2,
     .middile-bar,
@@ -994,6 +1024,7 @@ img {
 }
 
 @media (max-width: 900px) {
+
     .full-header,
     .section-2,
     .middile-bar,
@@ -1064,7 +1095,7 @@ img {
     }
 
     .number-line-main,
-    .section-2 > .line,
+    .section-2>.line,
     .category .line,
     .article-cards .top-layer .top-img {
         display: none;

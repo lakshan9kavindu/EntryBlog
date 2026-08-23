@@ -309,20 +309,20 @@ main {
     object-fit: contain;
 }
 
-.signup-form > p {
+.signup-form>p {
     margin-top: 22px;
     text-align: center;
     font-size: 13px;
     color: rgba(247, 245, 244, 0.8);
 }
 
-.signup-form > p a {
+.signup-form>p a {
     color: var(--gold);
     font-weight: bold;
     text-decoration: none;
 }
 
-.signup-form > p a:hover {
+.signup-form>p a:hover {
     text-decoration: underline;
 }
 
@@ -479,6 +479,7 @@ footer .social img {
  */
 
 @media (max-width: 1180px) {
+
     .navigation,
     main,
     footer .component {
@@ -491,6 +492,7 @@ footer .social img {
 }
 
 @media (max-width: 900px) {
+
     .navigation,
     main,
     footer .component {
@@ -561,6 +563,7 @@ footer .social img {
 }
 
 @media (max-width: 560px) {
+
     .navigation,
     main,
     footer .component {
