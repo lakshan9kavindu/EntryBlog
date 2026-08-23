@@ -77,7 +77,7 @@ $articleCards = array_slice($articles, 0, 2);
             <h3><?php echo $displayEmail; ?></h3>
             <p>Member account</p>
             <div class="button">
-                <a href="#"><img src="../assets/icons/facebook.png" alt="followers">
+                <a href="#"><img src="../assets/icons/Facebook.png" alt="followers">
                     <p><?php echo $followersCount; ?> Followers</p>
                 </a>
                 <a href="#"><img src="../assets/icons/Instagram Circle.png" alt="followings">
@@ -89,10 +89,10 @@ $articleCards = array_slice($articles, 0, 2);
             </div>
             <div class="button-2">
                 <a href="article-upload.php">
-                    <h3>New article</h3><img src="../assets/icons/facebook.png" alt="Add article">
+                    <h3>New article</h3><img src="../assets/icons/Facebook.png" alt="Add article">
                 </a>
                 <a href="logout.php">
-                    <h3>Log out</h3><img src="../assets/icons/facebook.png" alt="Log out">
+                    <h3>Log out</h3><img src="../assets/icons/Facebook.png" alt="Log out">
                 </a>
             </div>
         </div>
@@ -181,7 +181,7 @@ $articleCards = array_slice($articles, 0, 2);
                     </div>
                     <div class="social">
                         <p>Connect with us</p>
-                        <img src="../assets/icons/facebook.png" alt="Facebook">
+                        <img src="../assets/icons/Facebook.png" alt="Facebook">
                         <img src="../assets/icons/Instagram Circle.png" alt="Instagram">
                         <img src="../assets/icons/Medium.png" alt="Medium">
                     </div>
