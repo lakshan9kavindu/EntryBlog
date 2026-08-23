@@ -11,7 +11,9 @@ CREATE TABLE users (
 -- Articles
 CREATE TABLE articles (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
     thumbnail VARCHAR(500),
+    category VARCHAR(100) NOT NULL DEFAULT 'Technology',
     userid INT UNSIGNED NOT NULL,
     short_dec TEXT,
     article TEXT NOT NULL,
@@ -53,4 +55,19 @@ CREATE TABLE follows (
 
     -- Prevent a user from following themselves
     CHECK (userid <> followid)
+);
+
+-- Saved Articles
+CREATE TABLE saved_articles (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    userid INT UNSIGNED NOT NULL,
+    articleid INT UNSIGNED NOT NULL,
+
+    FOREIGN KEY (userid) REFERENCES users(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (articleid) REFERENCES articles(id)
+        ON DELETE CASCADE,
+
+    -- Prevent the same user from saving an article twice
+    UNIQUE (userid, articleid)
 );

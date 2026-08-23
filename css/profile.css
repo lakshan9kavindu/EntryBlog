@@ -1,0 +1,957 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #040506;
+}
+
+/*
+header
+*/
+
+.full-header {
+    background-color: #040506;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+navigationbar
+*/
+
+.navigation {
+    display: flex;
+    width: min(calc(100% - 40px), 1300px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 30px;
+}
+
+.navbar {
+    display: inline-flex;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #040506;
+    gap: 30px;
+}
+
+.nav-links {
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.nav-links ul {
+    list-style: none;
+    display: inline-flex;
+    gap: 70px;
+}
+
+.nav-links .active {
+    font-size: larger;
+    font-weight: bolder;
+    text-decoration: underline #F7F5F4;
+}
+
+.nav-links ul li a {
+    color: #F7F5F4;
+    text-decoration: none;
+}
+
+.search-bar {
+    margin-right: auto;
+    margin: auto;
+    margin-left: 50px;
+    display: inline-flex;
+    padding: 10px;
+    border: solid #F7F5F4 1px;
+    border-radius: 50px;
+    background-color: black;
+    width: 200px;
+    height: 15px;
+}
+
+.search-bar img {
+    width: 30px;
+    height: 30px;
+    margin-top: -6px;
+    margin-bottom: auto
+}
+
+.search-bar input[type=text] {
+    height: 15px;
+    border-radius: 50px;
+    background-color: #040506;
+    border: none;
+}
+
+.user-profile img {
+    margin: auto;
+    width: auto;
+    height: 45px;
+}
+
+.profile-page {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    width: min(calc(100% - 40px), 1100px);
+    margin: 50px auto;
+    color: #040506;
+}
+
+.profile-summary,
+.profile-article {
+    padding: 28px;
+    border-radius: 20px;
+    background: #f7f5f4;
+}
+
+.profile-summary {
+    align-self: start;
+    text-align: center;
+}
+
+.profile-summary>img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-summary h1 {
+    overflow-wrap: anywhere;
+    margin: 18px 0 4px;
+    font-size: 19px;
+}
+
+.profile-summary p {
+    margin: 0 0 24px;
+    color: #777;
+    font-size: 13px;
+}
+
+.profile-action {
+    display: block;
+    margin-top: 12px;
+    padding: 10px 16px;
+    border-radius: 22px;
+    color: #040506;
+    background: #fdc63e;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.profile-articles h2 {
+    margin: 0 0 18px;
+    color: #f7f5f4;
+    font-size: 28px;
+}
+
+.profile-article {
+    margin-bottom: 16px;
+}
+
+.profile-article h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+.profile-article p {
+    margin: 0 0 12px;
+    line-height: 1.45;
+}
+
+.profile-article time,
+.empty-state {
+    color: #777;
+    font-size: 12px;
+}
+
+@media (max-width: 760px) {
+    .profile-page {
+        grid-template-columns: 1fr;
+        margin-top: 30px;
+    }
+}
+
+.first-card {
+    display: flex;
+    width: min(calc(100% - 40px), 1180px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.first-card .pro-card {
+    margin-top: 50px;
+    width: 400px;
+    height: 400px;
+    background-color: #F7F5F4;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.first-card .pro-card img {
+    width: 80px;
+    height: 80px;
+    margin-top: 30px;
+    border-radius: 50%;
+}
+
+.pro-card h3,
+.pro-card p {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.pro-card .button {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.pro-card .button a {
+    display: inline-flex;
+    gap: 10px;
+    background-color: #FDC63E;
+    height: 30px;
+    color: #040506;
+    margin-top: auto;
+    text-decoration: none;
+    border-radius: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.pro-card .button a p {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+.pro-card .button img {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 20px;
+    height: 20px;
+}
+
+.pro-card .button-2 a {
+    display: inline-flex;
+    gap: 10px;
+    text-decoration: none;
+    color: #F7F5F4;
+    width: 90%;
+    margin-top: 20px;
+    height: 30px;
+    background-color: #040506;
+    border-radius: 50px;
+}
+
+.pro-card .button-2 a h3 {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 15px;
+    font-weight: bolder;
+    margin-left: auto;
+}
+
+.pro-card .button-2 img {
+    width: 20px;
+    height: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+}
+
+/*
+editor's article
+*/
+.article-card {
+    margin-left: auto;
+
+}
+
+.article-card .article-item {
+    display: flex;
+    gap: 20px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px;
+}
+
+
+.editors-article {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    border-radius: 40px;
+    /* Matched to the image's softer curve */
+    overflow: clip;
+    /* Keeps the image inside the rounded corners */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Pushes content to the bottom */
+    padding: 24px;
+    box-sizing: border-box;
+    color: #F7F5F4;
+}
+
+/* 2. Background Image Positioning */
+.editors-article .post-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.editors-article .post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensures the image fills the card without stretching */
+}
+
+/* 3. Gradient Overlay (The Crop Mask effect) */
+.editors-article::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Starts completely transparent, gets dark grey in the middle, solid black at bottom */
+    background: linear-gradient(to bottom, transparent 0%, rgba(20, 20, 20, 0.7) 45%, #111111 80%);
+    z-index: 1;
+}
+
+/* Ensure all text/UI elements sit ABOVE the image and gradient */
+.editors-article>div,
+.editors-article>section {
+    position: relative;
+    z-index: 2;
+}
+
+/* 4. "Latest" Label (Top Left) */
+.editors-article .lable {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: flex;
+    align-items: center;
+    color: #FDC63E;
+    font-weight: 800;
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    gap: 8px;
+    background-color: #040506;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.editors-article .lable p {
+    margin: 0;
+}
+
+.editors-article .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background-color: #FDC63E;
+}
+
+/* 5. Typography (Title & Description) */
+.editors-article .category p {
+    color: #FDC63E;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    font-size: 12px;
+}
+
+.editors-article .topic h2 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    line-height: 1.3;
+}
+
+.editors-article .short-description h3 {
+    margin: 0 0 24px 0;
+    font-size: 12px;
+    font-weight: normal;
+    color: #d1d1d1;
+    line-height: 1.4;
+}
+
+/* 6. Profile Section (Using CSS Grid to match the layout without changing HTML) */
+.article-profile,
+.editors-article .article-profile {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    row-gap: 4px;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+}
+
+.article-profile p {
+    margin: 0;
+}
+
+/* Place the avatar on the left, spanning both rows */
+.article-profile .profile-dp,
+.editors-article .profile-dp {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    margin-right: 12px;
+}
+
+.article-profile .profile-dp img,
+.editors-article .profile-dp img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+/* Name on the top row */
+.article-profile .author-name,
+.editors-article .author-name {
+    grid-column: 2 / 4;
+    grid-row: 1 / 2;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* Date on the bottom row, left */
+.article-profile .publish-date,
+.editors-article .publish-date {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    font-size: 13px;
+    color: #a0a0a0;
+}
+
+/* Reading time on the bottom row, right */
+.article-profile .reading-time,
+.editors-article .reading-time {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    font-size: 13px;
+    color: #a0a0a0;
+}
+
+/* Download/Down icon pushed all the way to the right */
+.article-profile .down-icon,
+.editors-article .down-icon {
+    grid-column: 4 / 5;
+    grid-row: 1 / 3;
+    justify-self: end;
+}
+
+.article-profile .down-icon img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    padding: 6px;
+    box-sizing: border-box;
+}
+
+.view-articles {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #F7F5F4;
+    border-radius: 50px;
+}
+
+.view-articles-container a {
+    text-decoration: none;
+}
+
+.view-articles h3 {
+    color: #040506;
+    font-weight: bolder;
+    font-size: 15px;
+    margin-left: auto;
+}
+
+.view-articles img {
+    width: 30px;
+    height: 30px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+}
+
+
+/*
+footer
+*/
+
+.footer-1 {
+    display: flex;
+    background-color: #040506;
+    border-radius: 100px 100px 0px 0px;
+    margin-top: 50px;
+
+}
+
+footer {
+    height: 300px;
+    color: #F7F5F4;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+footer .component {
+    padding-top: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+    height: auto;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    gap: 20px;
+}
+
+footer .first {
+    width: 400px;
+}
+
+footer .text-1 {
+    margin-top: 30px;
+}
+
+footer .text-1 .bold {
+    font-weight: bolder;
+    font-size: large;
+}
+
+footer .copiright p {
+    margin-top: 70px;
+}
+
+footer .social {
+    margin-top: 50px;
+}
+
+footer .second {
+    width: 500px;
+}
+
+footer .second img {
+    position: relative;
+    top: 70px;
+    width: 400px;
+}
+
+footer .page {
+    margin-left: -230px;
+    position: relative;
+    display: flex;
+    gap: 50px;
+}
+
+footer .page li {
+    display: inline;
+    list-style: none;
+}
+
+footer .page ul {
+    display: flex;
+    gap: 50px;
+}
+
+footer .page li a {
+    text-decoration: none;
+    color: #F7F5F4;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-right: 20px;
+}
+
+footer .button img {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 40px;
+    height: 40px;
+}
+
+footer .button .b-1 img {
+    transform: rotate(-90deg)
+}
+
+footer .button {
+    display: inline-flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+footer .button p {
+    margin-left: 20px;
+    margin-right: auto;
+    font-size: 15px;
+    font-weight: bolder;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 0;
+}
+
+footer .button .b-1,
+footer .button .b-2 {
+    background-color: #FDC63E;
+    height: 40px;
+    border-radius: 50px;
+    display: inline-flex;
+    gap: 10px;
+    color: #040506;
+
+}
+
+footer .button .b-1 {
+    background-color: #F7F5F4;
+}
+
+footer .social {
+    display: flex;
+    margin-left: -50px;
+    position: relative;
+}
+
+footer .social p {
+    margin-right: 80px;
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+footer .social img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/* responsive layout - matched with article page */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+.logo img {
+    display: block;
+    height: auto;
+}
+
+.menu-toggle {
+    display: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.menu-toggle img {
+    display: block;
+    width: 32px;
+    height: 32px;
+}
+
+.view-articles {
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 12px;
+}
+
+.view-articles h3 {
+    margin-right: 8px;
+}
+
+@media (max-width: 1180px) {
+
+    .full-header,
+    .first-card,
+    .profile-page {
+        width: min(calc(100% - 40px), 1040px);
+    }
+
+    .first-card {
+        gap: 28px;
+    }
+
+    .article-card {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .article-card .article-item {
+        width: 100%;
+        height: auto;
+        flex-wrap: wrap;
+    }
+
+    .article-card .article-item .editors-article {
+        flex: 1 1 280px;
+    }
+
+    footer {
+        width: 100%;
+        height: auto;
+    }
+
+    footer .component {
+        width: min(calc(100% - 40px), 1040px);
+    }
+}
+
+@media (max-width: 900px) {
+
+    .full-header,
+    .first-card,
+    .profile-page {
+        width: min(calc(100% - 36px), 700px);
+    }
+
+    .navbar {
+        width: 100%;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .nav-links {
+        order: 3;
+        flex-basis: 100%;
+        overflow-x: auto;
+    }
+
+    .nav-links ul {
+        justify-content: flex-start;
+        gap: 24px;
+        padding: 0 4px 6px;
+    }
+
+    .search-bar {
+        width: 150px;
+        margin-left: auto;
+    }
+
+    .first-card {
+        display: block;
+    }
+
+    .first-card .pro-card {
+        width: min(100%, 420px);
+        height: auto;
+        min-height: 0;
+        margin: 35px auto 0;
+        padding: 24px 16px;
+    }
+
+    .pro-card h3 {
+        overflow-wrap: anywhere;
+        text-align: center;
+    }
+
+    .article-card .article-item {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 28px;
+    }
+
+    .article-card .article-item .editors-article {
+        width: 100%;
+        height: 380px;
+    }
+
+    .view-articles {
+        width: 100%;
+    }
+
+    footer .component {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+
+    footer .first,
+    footer .third {
+        width: auto;
+    }
+
+    footer .second {
+        display: none;
+    }
+
+    footer .page {
+        margin-left: 0;
+    }
+
+    footer .page ul {
+        flex-wrap: wrap;
+        gap: 16px 25px;
+        padding-left: 0;
+    }
+
+    footer .social {
+        margin-left: 0;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 560px) {
+    .navigation {
+        padding-top: 22px;
+    }
+
+    .logo img {
+        width: 96px;
+    }
+
+    .navbar {
+        position: relative;
+    }
+
+    .menu-toggle {
+        display: block;
+        order: 2;
+        margin-left: auto;
+    }
+
+    .navbar .user-profile {
+        display: none;
+    }
+
+    .navbar .search-bar,
+    .navbar .nav-links {
+        display: none;
+    }
+
+    .navbar.menu-open .nav-links {
+        display: block;
+        order: 4;
+        width: 100%;
+        padding: 14px 0;
+        border-top: 1px solid #444;
+        background: #040506;
+    }
+
+    .navbar.menu-open .nav-links ul {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .navbar.menu-open .nav-links li a {
+        display: block;
+        padding: 12px 8px;
+        text-align: center;
+    }
+
+    .navbar.menu-open .search-bar {
+        display: flex;
+        order: 5;
+        width: 100%;
+        margin: 0;
+    }
+
+    .first-card,
+    .profile-page {
+        width: min(calc(100% - 28px), 620px);
+    }
+
+    .pro-card .button {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .pro-card .button a,
+    .pro-card .button-2 a {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .article-card .article-item {
+        grid-template-columns: 1fr;
+    }
+
+    .article-card .article-item .editors-article {
+        height: 350px;
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    .article-profile {
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .article-profile .reading-time,
+    .article-profile .down-icon {
+        display: none;
+    }
+
+    .footer-1 {
+        border-radius: 38px 38px 0 0;
+    }
+
+    footer .component {
+        grid-template-columns: 1fr;
+        width: min(calc(100% - 28px), 620px);
+        padding: 24px 0 30px;
+    }
+
+    footer .copiright p {
+        margin-top: 28px;
+    }
+
+    footer .button {
+        flex-wrap: wrap;
+    }
+
+    footer .button .b-1,
+    footer .button .b-2 {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .logo img {
+        width: 90px;
+    }
+
+    .pro-card h3 {
+        font-size: 16px;
+    }
+
+    .pro-card .button a,
+    .pro-card .button-2 a {
+        font-size: 11px;
+    }
+}

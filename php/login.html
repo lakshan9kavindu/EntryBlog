@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/signup-login.css">
+    <title>Login - EntryBlog</title>
+</head>
+
+<body>
+    <div class="full-header">
+        <section class="navigation">
+            <div class="navbar">
+                <div class="logo"><a href="index.php"><img src="../assets/logo/logo.png" alt="Logo"></a></div>
+                <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><img
+                        src="../assets/icons/profile-icon.png" alt="Menu"></button>
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="index.php#categories">Categories</a></li>
+                        <li><a href="index.php#about">About us</a></li>
+                        <li><a href="index.php#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <img src="../assets/icons/Search-white.png" alt="Search Icon">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <main>
+        <div class="signup-container">
+            <div class="social-icon">
+                <div class="line"></div>
+                <div class="social-links">
+                    <a href="#"><img src="../assets/icons/facebook.png" alt="Facebook"></a>
+                    <a href="#"><img src="../assets/icons/Instagram Circle.png" alt="Instagram"></a>
+                    <a href="#"><img src="../assets/icons/Medium.png" alt="Medium"></a>
+                </div>
+            </div>
+            <div class="banner">
+                <img src="../assets/page-image/login.png" alt="Login Banner">
+            </div>
+            <div class="signup-form">
+                <h1>Login</h1>
+                <form action="login.php" method="POST">
+                    <label for="email">Email Address</label>
+                    <input id="email" type="email" name="email" placeholder="Your@mail.com" required>
+
+                    <label for="password">Password</label>
+                    <input id="password" type="password" name="password" required>
+
+                    <div class="section-2">
+                        <div class="check">
+                            <input type="checkbox" name="remember" id="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <div class="forget">
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                    </div>
+                    <div class="register-button">
+                        <button type="submit">Login</button>
+                        <img src="../assets/icons/Down Button.png" alt="Arrow Right">
+                    </div>
+                </form>
+                <p>Don't have an account yet? <a href="signup.html">Sign Up</a></p>
+            </div>
+        </div>
+    </main>
+
+    <section class="footer-1">
+        <footer>
+            <div class="component">
+                <div class="first">
+                    <img src="../assets/logo/logo.png" alt="Logo">
+                    <div class="text-1">
+                        <p>Upload your own blog articles</p>
+                        <p class="bold">to read everyone with us</p>
+                    </div>
+                    <div class="copiright">
+                        <p>© 2026 EntryBlog. All rights reserved.</p>
+                    </div>
+                </div>
+                <div class="second">
+                    <img src="../assets/icons/Vector 2.png" alt="Decoration">
+                </div>
+                <div class="third">
+                    <div class="page">
+                        <ul>
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="index.php#categories">Categories</a></li>
+                            <li><a href="index.php#about">About us</a></li>
+                            <li><a href="index.php#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="button">
+                        <a class="b-1" href="all-articles.php">
+                            <p>All articles</p>
+                            <img src="../assets/icons/Down Button.png" alt="All articles">
+                        </a>
+                        <a class="b-2" href="signup.html">
+                            <p>Login or Sign up</p>
+                            <img src="../assets/icons/Down Button.png" alt="Login or sign up">
+                        </a>
+                    </div>
+                    <div class="social">
+                        <p>Connect with us</p>
+                        <img src="../assets/icons/facebook.png" alt="Facebook">
+                        <img src="../assets/icons/Instagram Circle.png" alt="Instagram">
+                        <img src="../assets/icons/Medium.png" alt="Medium">
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+    <script src="../js/navbar.js"></script>
+</body>
+
+</html>
