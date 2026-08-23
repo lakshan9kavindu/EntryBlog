@@ -593,6 +593,24 @@ responsive part
         font-size: clamp(28px, 7vw, 48px);
     }
 
+
+
+    .follow-btn, .like-btn, .save-btn{
+        margin-left:auto;
+        padding: 5px;
+        width: 70px;
+    }
+
+    .save-btn{
+        margin-top: -50px;
+        margin-left: 100px;
+    }
+
+    .footer-1{
+        margin-top: 0;
+    }
+
+
     footer .component {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -618,8 +636,21 @@ responsive part
 
     footer .social {
         margin-left: 0;
+        margin-top: 0;
         flex-wrap: wrap;
         gap: 10px;
+    }
+
+    .social p {
+        width: 100%;
+    }
+
+    footer .button {
+        width: 100%;
+    }
+
+    .profile-info p{
+        margin-top: 10px;
     }
 }
 

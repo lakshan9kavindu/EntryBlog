@@ -197,6 +197,6 @@ $currentThumbnail = (string) ($editArticle['thumbnail'] ?? '');
             placeholder.hidden = true;
         });
     </script>
-    <script src="../js/navbar.js"></script>
+    <script src="../js/navbar.js?v=<?php echo file_exists(__DIR__ . '/../js/navbar.js') ? filemtime(__DIR__ . '/../js/navbar.js') : time(); ?>"></script>
 </body>
 </html>

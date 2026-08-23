@@ -1107,6 +1107,14 @@ img {
         height: auto;
     }
 
+    .main-header .text-vector .header-button img{
+        width: 30px;
+    }
+
+    .second-article .top .btn {
+        margin-top: -50px;
+    }
+
     .text-vector .header-button {
         width: min(100%, 220px);
         height: auto;
@@ -1149,12 +1157,23 @@ img {
 
     .category-item h2,
     .category-item p {
-        width: auto;
+        width: 150px;
         flex: 1;
     }
 
+
+
+    .category .view-all-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .category .view-all-btn p {
+        margin-right: 5px;
+    }
+
     .article-cards {
-        margin-top: 35px;
+        margin-top: 20px;
     }
 
     .articles .editors-article {
@@ -1184,6 +1203,11 @@ img {
     .item-container {
         display: grid;
         grid-template-columns: 1fr;
+    }
+
+    .second-article .top{
+        margin-top: -20px;
+        display: inline-grid;
     }
 
     .article-item {
@@ -1220,6 +1244,12 @@ img {
         margin-left: 0;
         flex-wrap: wrap;
         gap: 10px;
+        margin-top: 20px;
+    }
+    
+    footer .social p{
+        width: 100%;
+        margin-right: 0;
     }
 }
 
